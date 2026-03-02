@@ -123,7 +123,7 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="font-sans text-xl md:text-2xl text-ink/80 leading-relaxed max-w-2xl mb-8">
+          <p className="font-sans text-lg text-ink leading-relaxed max-w-2xl mb-8">
             Product Designer, currently at Lightricks.
             <br /><br />
             I design systems and experiences shaped by real behavior &mdash; making complex things feel obvious.
@@ -132,7 +132,7 @@ export default function AboutPage() {
             Based in Tel Aviv. I look for inspiration in technology, culture, and city streets &mdash;
             usually on walks with Kali 🐕‍🦺
             <br /><br />
-            I studied at <em className="font-sans text-ink not-italic font-medium">Bezalel Academy of Arts and Design</em>,
+            I studied at Bezalel Academy of Arts and Design,
             which gave me a deep respect for how things look and feel &mdash; not just how they work.
           </p>
         </motion.div>
@@ -154,7 +154,7 @@ export default function AboutPage() {
             {about.skills.map((skill, i) => (
               <motion.li
                 key={skill}
-                className="font-sans text-ink text-lg border-b border-card pb-3 last:border-0 flex items-center justify-between group"
+                className="font-sans text-base text-ink border-b border-card pb-3 last:border-0 flex items-center justify-between group"
                 initial={{ opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0 }}
@@ -226,11 +226,11 @@ export default function AboutPage() {
                   style={{ backgroundColor: item.accent }}
                 />
                 <div>
-                  <div className="font-sans text-ink font-medium">{item.role}</div>
-                  <div className="font-sans text-muted text-sm">{item.place} · {item.products}</div>
+                  <div className="font-sans text-base text-ink">{item.role}</div>
+                  <div className="font-sans text-sm text-muted">{item.place} · {item.products}</div>
                 </div>
               </div>
-              <div className="font-mono text-sm text-muted ml-6 md:ml-0">{item.period}</div>
+              <div className="font-mono text-xs tracking-widest text-muted ml-6 md:ml-0">{item.period}</div>
             </div>
           ))}
         </div>
