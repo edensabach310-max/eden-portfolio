@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import Navbar from "@/components/layout/Navbar"
-import Footer from "@/components/layout/Footer"
+import SiteShell from "@/components/layout/SiteShell"
 import CustomCursor from "@/components/interactions/CustomCursor"
 import KonamiCode from "@/components/interactions/KonamiCode"
 
@@ -30,9 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <CustomCursor />
         <KonamiCode />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   )
