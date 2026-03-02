@@ -1,11 +1,98 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import Link from "next/link"
 import AnimatedText from "@/components/ui/AnimatedText"
 import { placeholderAbout } from "@/lib/placeholder-data"
 
 const about = placeholderAbout
+
+// ─── Polaroid Wall ────────────────────────────────────────────────────────────
+
+type StickerDef = { src: string; top: number; left: number; size: number; rotate: number }
+
+function Polaroid({
+  src,
+  alt,
+  rotate,
+  top,
+  left,
+  stickers,
+  delay,
+}: {
+  src: string
+  alt: string
+  rotate: number
+  top: number
+  left: number
+  stickers: StickerDef[]
+  delay: number
+}) {
+  return (
+    <motion.div
+      className="absolute"
+      style={{ top, left, width: 240 }}
+      initial={{ opacity: 0, y: 30, rotate: rotate - 4 }}
+      animate={{ opacity: 1, y: 0, rotate }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {/* Polaroid image — already has white border baked in */}
+      <Image src={src} alt={alt} width={240} height={340} className="object-contain" />
+
+      {/* Stickers ON the photo — positioned to look like they're pinning it */}
+      {stickers.map((s, i) => (
+        <div
+          key={i}
+          className="absolute pointer-events-none"
+          style={{ top: s.top, left: s.left, width: s.size, height: s.size, transform: `rotate(${s.rotate}deg)`, zIndex: 10 }}
+        >
+          <Image src={s.src} alt="" fill className="object-contain" />
+        </div>
+      ))}
+    </motion.div>
+  )
+}
+
+function PolaroidWall() {
+  return (
+    <div className="relative hidden md:block" style={{ height: 600, width: 500 }}>
+      <Polaroid
+        src="/about/photo-1.png"
+        alt="Eden Sabach"
+        rotate={0}
+        top={30}
+        left={0}
+        delay={0.4}
+        stickers={[
+          { src: "/stickers/smiley.png", top: -33, left: 75, size: 66, rotate: -8 },
+        ]}
+      />
+      <Polaroid
+        src="/about/photo-2.png"
+        alt="Eden Sabach"
+        rotate={0}
+        top={30}
+        left={245}
+        delay={0.55}
+        stickers={[
+          { src: "/stickers/smiley.png", top: -33, left: 87, size: 66, rotate: 28 },
+        ]}
+      />
+
+      {/* Extra floating sticker */}
+      <motion.div
+        className="absolute pointer-events-none"
+        style={{ bottom: 40, left: 30, width: 40, height: 40 }}
+        initial={{ opacity: 0, rotate: -20 }}
+        animate={{ opacity: 1, rotate: -15 }}
+        transition={{ duration: 0.6, delay: 0.9 }}
+      >
+        <Image src="/stickers/kali.png" alt="" fill className="object-contain drop-shadow-sm" />
+      </motion.div>
+    </div>
+  )
+}
 
 export default function AboutPage() {
   return (
@@ -30,7 +117,7 @@ export default function AboutPage() {
       </div>
 
       {/* Bio + photo */}
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_320px] gap-16 mb-24">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_520px] gap-16 mb-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,20 +137,8 @@ export default function AboutPage() {
           </p>
         </motion.div>
 
-        {/* Photo placeholder */}
-        <motion.div
-          className="aspect-[3/4] rounded-sm overflow-hidden bg-card flex items-end"
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div
-            className="w-full h-full flex items-center justify-center"
-            style={{ background: "linear-gradient(160deg, #E8E8E0 0%, #D0D0C8 100%)" }}
-          >
-            <span className="font-sans font-bold text-muted/40" style={{ fontSize: "8rem" }}>ES</span>
-          </div>
-        </motion.div>
+        {/* Polaroid wall */}
+        <PolaroidWall />
       </div>
 
       {/* Skills + Tools */}
