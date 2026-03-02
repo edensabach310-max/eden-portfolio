@@ -226,77 +226,74 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
         )}
       </div>
 
-      {/* Flexible content — mix of text sections, images, metrics, figma, video */}
+      {/* Content — structured text fields first, then flexible blocks */}
       <div className="px-6 md:px-12 max-w-4xl">
-        {project.contentBlocks && project.contentBlocks.length > 0 ? (
-          project.contentBlocks.map((block) => {
-            if (block._type === "sectionBlock") {
-              return <SectionBlock key={block._key} label={block.label} text={block.text} />
-            }
+        {/* Structured text sections */}
+        {project.overview && <SectionBlock label="Overview" text={project.overview} />}
+        {project.problem && <SectionBlock label="Problem" text={project.problem} />}
+        {project.process && <SectionBlock label="Process" text={project.process} />}
+        {project.solution && <SectionBlock label="Solution" text={project.solution} />}
+        {project.impact && <SectionBlock label="Impact" text={project.impact} />}
 
-            if (block._type === "textBlock") {
-              return <SectionBlock key={block._key} text={block.text} />
-            }
+        {/* Flexible content blocks — images, figma, metrics, video, extra text */}
+        {project.contentBlocks?.map((block) => {
+          if (block._type === "sectionBlock") {
+            return <SectionBlock key={block._key} label={block.label} text={block.text} />
+          }
 
-            if (block._type === "imageBlock") {
-              const src = (block.image as unknown as { url: string }).url || ""
-              return (
-                <ImageBlock
-                  key={block._key}
-                  src={src}
-                  alt={block.image.alt || ""}
-                  caption={block.caption}
-                  fullWidth={block.fullWidth}
-                />
-              )
-            }
+          if (block._type === "textBlock") {
+            return <SectionBlock key={block._key} text={block.text} />
+          }
 
-            if (block._type === "imagePair") {
-              const leftSrc = (block.left as unknown as { url: string }).url || ""
-              const rightSrc = (block.right as unknown as { url: string }).url || ""
-              return (
-                <ImagePairBlock
-                  key={block._key}
-                  leftSrc={leftSrc}
-                  leftAlt={block.left.alt || ""}
-                  rightSrc={rightSrc}
-                  rightAlt={block.right.alt || ""}
-                  caption={block.caption}
-                />
-              )
-            }
+          if (block._type === "imageBlock") {
+            const src = (block.image as unknown as { url: string }).url || ""
+            return (
+              <ImageBlock
+                key={block._key}
+                src={src}
+                alt={block.image.alt || ""}
+                caption={block.caption}
+                fullWidth={block.fullWidth}
+              />
+            )
+          }
 
-            if (block._type === "figmaEmbed") {
-              return <FigmaEmbed key={block._key} url={block.embedUrl} caption={block.caption} />
-            }
+          if (block._type === "imagePair") {
+            const leftSrc = (block.left as unknown as { url: string }).url || ""
+            const rightSrc = (block.right as unknown as { url: string }).url || ""
+            return (
+              <ImagePairBlock
+                key={block._key}
+                leftSrc={leftSrc}
+                leftAlt={block.left.alt || ""}
+                rightSrc={rightSrc}
+                rightAlt={block.right.alt || ""}
+                caption={block.caption}
+              />
+            )
+          }
 
-            if (block._type === "metricBlock") {
-              return <MetricBlock key={block._key} metrics={block.metrics} />
-            }
+          if (block._type === "figmaEmbed") {
+            return <FigmaEmbed key={block._key} url={block.embedUrl} caption={block.caption} />
+          }
 
-            if (block._type === "videoBlock") {
-              return (
-                <div key={block._key} className="my-12">
-                  <video src={block.url} controls className="w-full aspect-video bg-card/30" />
-                  {block.caption && (
-                    <p className="font-sans text-xs text-muted mt-3 text-center tracking-wide">{block.caption}</p>
-                  )}
-                </div>
-              )
-            }
+          if (block._type === "metricBlock") {
+            return <MetricBlock key={block._key} metrics={block.metrics} />
+          }
 
-            return null
-          })
-        ) : (
-          // Fallback: old structured text fields (backward compat / placeholder data)
-          <>
-            {project.overview && <SectionBlock label="Overview" text={project.overview} />}
-            {project.problem && <SectionBlock label="Problem" text={project.problem} />}
-            {project.process && <SectionBlock label="Process" text={project.process} />}
-            {project.solution && <SectionBlock label="Solution" text={project.solution} />}
-            {project.impact && <SectionBlock label="Impact" text={project.impact} />}
-          </>
-        )}
+          if (block._type === "videoBlock") {
+            return (
+              <div key={block._key} className="my-12">
+                <video src={block.url} controls className="w-full aspect-video bg-card/30" />
+                {block.caption && (
+                  <p className="font-sans text-xs text-muted mt-3 text-center tracking-wide">{block.caption}</p>
+                )}
+              </div>
+            )
+          }
+
+          return null
+        })}
       </div>
 
       {/* Next project */}
