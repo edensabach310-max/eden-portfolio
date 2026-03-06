@@ -43,7 +43,6 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
 
   return (
     <div className="min-h-screen">
-      {/* ── Draggable spawned stickers ────────────────────── */}
       {spawned.map((s) => (
         <SpawnSticker
           key={s.id} src={s.src} x={s.x} y={s.y} size={s.size} rotate={s.rotate}
@@ -60,7 +59,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
       >
         <motion.div style={{ y: heroY, opacity: heroOpacity }}>
           <motion.p
-            className="font-mono text-xs tracking-widest uppercase text-muted mb-10"
+            className="font-sans text-3xl font-light text-muted mb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -70,10 +69,10 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
 
           {/* Editorial hero */}
           <motion.div
-            className="font-sans font-medium text-ink"
+            className="font-sans font-light text-ink"
             style={{
               fontSize: "clamp(3rem, 8.5vw, 7.5rem)",
-              letterSpacing: "-0.04em",
+              letterSpacing: "-0.02em",
               lineHeight: 1.05,
             }}
             initial={{ opacity: 0, y: 24 }}
@@ -101,7 +100,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
 
           <div className="flex flex-col md:flex-row md:items-end justify-between mt-10 gap-6">
             <motion.p
-              className="font-sans text-lg text-muted max-w-md leading-relaxed"
+              className="font-sans text-3xl font-light text-muted max-w-xl leading-normal"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.55 }}
@@ -118,14 +117,14 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
               <Link
                 href="/about"
                 onClick={(e) => e.stopPropagation()}
-                className="font-sans text-sm text-muted hover:text-ink transition-colors hover-underline"
+                className="font-sans text-3xl font-light text-muted hover:text-ink transition-colors hover-underline"
               >
                 About me ↓
               </Link>
             </motion.div>
           </div>
 
-          {/* Hint — appears late, very subtle */}
+          {/* Hint — intentionally tiny/subtle easter egg */}
           <motion.p
             className="font-mono text-[10px] text-muted/30 tracking-widest uppercase mt-8"
             initial={{ opacity: 0 }}
@@ -150,12 +149,12 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
       </section>
 
       {/* ── Work Section ───────────────────────────────────── */}
-      <section className="px-6 md:px-12 pt-12 pb-8">
+      <section id="work" className="px-6 md:px-12 pt-12 pb-8">
         <div className="flex items-baseline justify-between border-b-2 border-ink pb-4 mb-0">
-          <span className="font-sans font-bold text-ink tracking-tight uppercase" style={{ fontSize: "clamp(1.1rem, 2vw, 1.6rem)", letterSpacing: "0.04em" }}>
+          <span className="font-sans text-3xl font-light text-ink">
             Selected Work
           </span>
-          <span className="font-sans text-xs uppercase tracking-widest text-muted">{productProjects.length} projects</span>
+          <span className="font-sans text-3xl font-light text-muted">{productProjects.length} projects</span>
         </div>
 
         {productProjects.map((project, i) => (
@@ -166,10 +165,10 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
       {/* ── Creative / Play ────────────────────────────────── */}
       <section className="px-6 md:px-12 pt-12 pb-24">
         <div className="flex items-baseline justify-between border-b-2 border-ink pb-4 mb-0">
-          <span className="font-sans font-bold text-ink tracking-tight uppercase" style={{ fontSize: "clamp(1.1rem, 2vw, 1.6rem)", letterSpacing: "0.04em" }}>
+          <span className="font-sans text-3xl font-light text-ink">
             <span className="text-muted">(not a product)</span> design projects
           </span>
-          <span className="font-sans text-xs uppercase tracking-widest text-muted">{creativeProjects.length} projects</span>
+          <span className="font-sans text-3xl font-light text-muted">{creativeProjects.length} projects</span>
         </div>
 
         {creativeProjects.map((project, i) => (
@@ -182,13 +181,14 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <AnimatedText
             text="Let's make something great."
-            className="font-display text-display-md text-ink max-w-lg"
+            className="font-sans font-light text-ink max-w-lg"
+            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}
           />
           <Link
             href="mailto:eden@example.com"
             data-cursor
             data-cursor-label="Email"
-            className="font-sans text-sm border border-ink text-ink px-8 py-4 hover:bg-ink hover:text-bg transition-colors duration-300 tracking-wide"
+            className="font-sans text-3xl font-light border border-ink text-ink px-8 py-4 hover:bg-ink hover:text-bg transition-colors duration-300"
           >
             Get in touch
           </Link>
