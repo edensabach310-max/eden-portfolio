@@ -1,22 +1,16 @@
 import { notFound } from "next/navigation"
+
+export const revalidate = 60 // refresh every 60 seconds
 import CaseStudyClient from "./CaseStudyClient"
-import { placeholderProjects } from "@/lib/placeholder-data"
+import { getProjectBySlug, getAllProjects } from "@/lib/sanity"
 import type { Metadata } from "next"
 
 interface Props {
   params: { slug: string }
 }
 
-// Uncomment to fetch from Sanity:
-// import { getProjectBySlug, getAllProjects } from "@/lib/sanity"
-
-async function getProject(slug: string) {
-  // return await getProjectBySlug(slug)
-  return placeholderProjects.find((p) => p.slug.current === slug) ?? null
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = await getProject(params.slug)
+  const project = await getProjectBySlug(params.slug)
   if (!project) return { title: "Not Found" }
   return {
     title: `${project.title} — Eden Sabach`,
@@ -25,17 +19,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  // const projects = await getAllProjects()
-  return placeholderProjects.map((p) => ({ slug: p.slug.current }))
+  const projects = await getAllProjects()
+  return projects.map((p: { slug: { current: string } }) => ({ slug: p.slug.current }))
 }
 
 export default async function CaseStudyPage({ params }: Props) {
-  const project = await getProject(params.slug)
+  const [project, allProjects] = await Promise.all([
+    getProjectBySlug(params.slug),
+    getAllProjects(),
+  ])
   if (!project) notFound()
 
-  const allProjects = placeholderProjects.filter((p) => p.category === project.category)
-  const idx = allProjects.findIndex((p) => p.slug.current === params.slug)
-  const nextProject = allProjects[idx + 1] ?? undefined
+  const sameCategory = allProjects.filter((p: { category: string }) => p.category === project.category)
+  const idx = sameCategory.findIndex((p: { slug: { current: string } }) => p.slug.current === params.slug)
+  const nextProject = sameCategory[idx + 1] ?? undefined
 
   return <CaseStudyClient project={project} nextProject={nextProject} />
 }

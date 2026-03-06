@@ -22,7 +22,7 @@ function SectionBlock({ label, text }: { label?: string; text: string }) {
             <span className="font-mono text-xs text-muted tracking-widest uppercase">{label}</span>
           )}
         </div>
-        <div className="font-sans text-ink/80 leading-relaxed" style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.3rem)" }}>
+        <div className="font-sans text-lg text-ink/80 leading-relaxed">
           <p>{text}</p>
         </div>
       </div>
@@ -160,7 +160,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
 
         <motion.p
           className="font-sans text-muted max-w-2xl leading-relaxed mb-12"
-          style={{ fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)" }}
+          style={{ fontSize: "1.25rem" }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -184,7 +184,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
             .map((meta) => (
               <div key={meta!.label}>
                 <div className="font-mono text-xs text-muted uppercase tracking-widest mb-1">{meta!.label}</div>
-                <div className="font-sans text-sm text-ink">{meta!.value}</div>
+                <div className="font-sans text-base text-ink">{meta!.value}</div>
               </div>
             ))}
         </motion.div>

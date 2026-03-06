@@ -154,7 +154,7 @@ export default function AboutPage() {
             {about.skills.map((skill, i) => (
               <motion.li
                 key={skill}
-                className="font-sans text-base text-ink border-b border-card pb-3 last:border-0 flex items-center justify-between group"
+                className="font-sans text-lg text-ink border-b border-card pb-3 last:border-0 flex items-center justify-between group"
                 initial={{ opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0 }}
@@ -180,7 +180,7 @@ export default function AboutPage() {
             {about.tools.map((tool, i) => (
               <motion.span
                 key={tool}
-                className="font-sans text-sm px-4 py-2 border border-card rounded-full text-muted hover:border-ink hover:text-ink transition-colors duration-200"
+                className="font-sans text-base px-4 py-2 border border-card rounded-full text-muted hover:border-ink hover:text-ink transition-colors duration-200"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0 }}
@@ -226,8 +226,8 @@ export default function AboutPage() {
                   style={{ backgroundColor: item.accent }}
                 />
                 <div>
-                  <div className="font-sans text-base text-ink">{item.role}</div>
-                  <div className="font-sans text-sm text-muted">{item.place} · {item.products}</div>
+                  <div className="font-sans text-lg text-ink">{item.role}</div>
+                  <div className="font-sans text-lg text-muted">{item.place} · {item.products}</div>
                 </div>
               </div>
               <div className="font-mono text-xs tracking-widest text-muted ml-6 md:ml-0">{item.period}</div>

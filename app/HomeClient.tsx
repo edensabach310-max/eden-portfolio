@@ -101,7 +101,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
 
           <div className="flex flex-col md:flex-row md:items-end justify-between mt-10 gap-6">
             <motion.p
-              className="font-sans text-base md:text-lg text-muted max-w-md leading-relaxed"
+              className="font-sans text-lg text-muted max-w-md leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.55 }}

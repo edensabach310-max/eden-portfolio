@@ -4,9 +4,9 @@ import type { SanityImage } from "@/types"
 
 export const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "your-project-id",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "prod",
   apiVersion: "2024-01-01",
-  useCdn: true,
+  useCdn: false,
 })
 
 const builder = imageUrlBuilder(sanityClient)
