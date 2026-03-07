@@ -30,7 +30,7 @@ export interface SanityImage {
 export type ContentBlock =
   | { _type: "sectionBlock"; _key: string; label?: string; text: string }
   | { _type: "textBlock"; _key: string; text: string }
-  | { _type: "imageBlock"; _key: string; image: SanityImage; caption?: string; fullWidth?: boolean }
+  | { _type: "imageBlock"; _key: string; image: SanityImage; caption?: string; fullWidth?: boolean; alignment?: "full" | "left" | "right" }
   | { _type: "imagePair"; _key: string; left: SanityImage; right: SanityImage; caption?: string }
   | { _type: "videoBlock"; _key: string; url: string; caption?: string }
   | { _type: "figmaEmbed"; _key: string; embedUrl: string; caption?: string }

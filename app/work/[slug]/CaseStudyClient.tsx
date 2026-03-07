@@ -83,17 +83,24 @@ function ImageBlock({
   src,
   alt,
   caption,
-  fullWidth,
+  alignment = "left",
 }: {
   src: string
   alt: string
   caption?: string
-  fullWidth?: boolean
+  alignment?: "full" | "left" | "right"
 }) {
+  const wrapperClass =
+    alignment === "full"
+      ? "my-12 w-full"
+      : alignment === "right"
+      ? "my-12 w-full md:w-2/3 ml-auto"
+      : "my-12 w-full md:w-2/3 mr-auto"
+
   return (
-    <div className={`my-12 ${fullWidth ? "-mx-6 md:-mx-12" : ""}`}>
+    <div className={wrapperClass}>
       <div className="relative aspect-video overflow-hidden bg-card/30">
-        <Image src={src} alt={alt} fill className="object-cover" sizes="100vw" />
+        <Image src={src} alt={alt} fill className="object-cover" sizes={alignment === "full" ? "100vw" : "66vw"} />
       </div>
       {caption && (
         <p className="font-sans text-3xl font-light text-muted mt-3">{caption}</p>
@@ -276,62 +283,37 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
       {/* Content */}
       <div className="px-6 md:px-12">
 
-        {/* Editorial grid: 2/3 text | 1/3 side images */}
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-x-16 items-start">
+        {project.overview && <SectionBlock label="Overview" text={project.overview} />}
+        {project.problem && <SectionBlock label="Problem" text={project.problem} />}
+        {project.process && <SectionBlock label="Process" text={project.process} />}
+        {project.solution && <SectionBlock label="Solution" text={project.solution} />}
+        {project.impact && <SectionBlock label="Impact" text={project.impact} />}
 
-          {/* Left — text sections */}
-          <div>
-            {project.overview && <SectionBlock label="Overview" text={project.overview} />}
-            {project.problem && <SectionBlock label="Problem" text={project.problem} />}
-            {project.process && <SectionBlock label="Process" text={project.process} />}
-            {project.solution && <SectionBlock label="Solution" text={project.solution} />}
-            {project.impact && <SectionBlock label="Impact" text={project.impact} />}
+        {project.contentBlocks?.map((block) => {
+          if (block._type === "sectionBlock")
+            return <SectionBlock key={block._key} label={block.label} text={block.text} />
+          if (block._type === "textBlock")
+            return <SectionBlock key={block._key} text={block.text} />
+          if (block._type === "imageBlock") {
+            const src = (block.image as unknown as { url: string }).url || ""
+            // alignment field takes precedence; fall back to legacy fullWidth boolean
+            const alignment = block.alignment ?? (block.fullWidth ? "full" : "left")
+            return <ImageBlock key={block._key} src={src} alt={block.image.alt || ""} caption={block.caption} alignment={alignment} />
+          }
+          if (block._type === "imagePair") {
+            const leftSrc = (block.left as unknown as { url: string }).url || ""
+            const rightSrc = (block.right as unknown as { url: string }).url || ""
+            return <ImagePairBlock key={block._key} leftSrc={leftSrc} leftAlt={block.left.alt || ""} rightSrc={rightSrc} rightAlt={block.right.alt || ""} caption={block.caption} />
+          }
+          if (block._type === "figmaEmbed")
+            return <FigmaEmbed key={block._key} url={block.embedUrl} caption={block.caption} />
+          if (block._type === "metricBlock")
+            return <MetricBlock key={block._key} metrics={block.metrics} />
+          if (block._type === "videoBlock")
+            return <AutoplayVideo key={block._key} src={block.url} caption={block.caption} />
+          return null
+        })}
 
-            {project.contentBlocks?.filter(b =>
-              b._type === "sectionBlock" || b._type === "textBlock" ||
-              b._type === "figmaEmbed" || b._type === "metricBlock" || b._type === "videoBlock" ||
-              b._type === "imagePair" || (b._type === "imageBlock" && b.fullWidth)
-            ).map((block) => {
-              if (block._type === "sectionBlock")
-                return <SectionBlock key={block._key} label={block.label} text={block.text} />
-              if (block._type === "textBlock")
-                return <SectionBlock key={block._key} text={block.text} />
-              if (block._type === "imageBlock" && block.fullWidth) {
-                const src = (block.image as unknown as { url: string }).url || ""
-                return <ImageBlock key={block._key} src={src} alt={block.image.alt || ""} caption={block.caption} />
-              }
-              if (block._type === "imagePair") {
-                const leftSrc = (block.left as unknown as { url: string }).url || ""
-                const rightSrc = (block.right as unknown as { url: string }).url || ""
-                return <ImagePairBlock key={block._key} leftSrc={leftSrc} leftAlt={block.left.alt || ""} rightSrc={rightSrc} rightAlt={block.right.alt || ""} caption={block.caption} />
-              }
-              if (block._type === "figmaEmbed")
-                return <FigmaEmbed key={block._key} url={block.embedUrl} caption={block.caption} />
-              if (block._type === "metricBlock")
-                return <MetricBlock key={block._key} metrics={block.metrics} />
-              if (block._type === "videoBlock")
-                return <AutoplayVideo key={block._key} src={block.url} caption={block.caption} />
-              return null
-            })}
-          </div>
-
-          {/* Right — side images (non-fullWidth imageBlocks) */}
-          <div className="hidden md:flex flex-col gap-8 pt-12 sticky top-32">
-            {project.contentBlocks?.filter(b => b._type === "imageBlock" && !b.fullWidth).map((block) => {
-              if (block._type !== "imageBlock") return null
-              const src = (block.image as unknown as { url: string }).url || ""
-              return (
-                <div key={block._key}>
-                  <div className="relative aspect-[3/4] overflow-hidden bg-card/30">
-                    <Image src={src} alt={block.image.alt || ""} fill className="object-cover" sizes="33vw" />
-                  </div>
-                  {block.caption && <p className="font-sans text-3xl font-light text-muted mt-3">{block.caption}</p>}
-                </div>
-              )
-            })}
-          </div>
-
-        </div>
       </div>
 
       {/* Next project */}

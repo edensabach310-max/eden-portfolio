@@ -145,7 +145,20 @@ export const projectSchema = defineType({
               fields: [defineField({ name: "alt", title: "Alt text", type: "string" })],
             }),
             defineField({ name: "caption", title: "Caption", type: "string" }),
-            defineField({ name: "fullWidth", title: "Full Width (edge to edge)", type: "boolean", initialValue: false }),
+            defineField({
+              name: "alignment",
+              title: "Alignment",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Full width (edge to edge)", value: "full" },
+                  { title: "Left aligned (text column width)", value: "left" },
+                  { title: "Right aligned (text column width)", value: "right" },
+                ],
+                layout: "radio",
+              },
+              initialValue: "left",
+            }),
           ],
           preview: {
             select: { title: "caption", media: "image" },
