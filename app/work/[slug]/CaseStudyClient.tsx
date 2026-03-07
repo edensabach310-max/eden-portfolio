@@ -7,36 +7,49 @@ import Link from "next/link"
 import AnimatedText from "@/components/ui/AnimatedText"
 import type { Project } from "@/types"
 
+function getYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/)
+  return match ? match[1] : null
+}
+
 function AutoplayVideo({ src, caption }: { src: string; caption?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const youtubeId = getYouTubeId(src)
 
   useEffect(() => {
     const video = videoRef.current
-    if (!video) return
+    if (!video || youtubeId) return
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {})
-        } else {
-          video.pause()
-        }
+        if (entry.isIntersecting) video.play().catch(() => {})
+        else video.pause()
       },
       { threshold: 0.3 }
     )
     observer.observe(video)
     return () => observer.disconnect()
-  }, [])
+  }, [youtubeId])
 
   return (
     <div className="my-12">
-      <video
-        ref={videoRef}
-        src={src}
-        muted
-        playsInline
-        loop
-        className="w-full aspect-video bg-card/30"
-      />
+      {youtubeId ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&modestbranding=1`}
+          className="w-full aspect-video bg-card/30"
+          allow="autoplay; fullscreen"
+          style={{ border: "none" }}
+          title="video"
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          src={src}
+          muted
+          playsInline
+          loop
+          className="w-full aspect-video bg-card/30"
+        />
+      )}
       {caption && <p className="font-sans text-3xl font-light text-muted mt-3">{caption}</p>}
     </div>
   )
