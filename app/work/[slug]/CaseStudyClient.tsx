@@ -1,10 +1,46 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import AnimatedText from "@/components/ui/AnimatedText"
 import type { Project } from "@/types"
+
+function AutoplayVideo({ src, caption }: { src: string; caption?: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div className="my-12">
+      <video
+        ref={videoRef}
+        src={src}
+        muted
+        playsInline
+        loop
+        className="w-full aspect-video bg-card/30"
+      />
+      {caption && <p className="font-sans text-3xl font-light text-muted mt-3">{caption}</p>}
+    </div>
+  )
+}
 
 interface Props {
   project: Project
@@ -261,12 +297,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
               if (block._type === "metricBlock")
                 return <MetricBlock key={block._key} metrics={block.metrics} />
               if (block._type === "videoBlock")
-                return (
-                  <div key={block._key} className="my-12">
-                    <video src={block.url} controls className="w-full aspect-video bg-card/30" />
-                    {block.caption && <p className="font-sans text-3xl font-light text-muted mt-3">{block.caption}</p>}
-                  </div>
-                )
+                return <AutoplayVideo key={block._key} src={block.url} caption={block.caption} />
               return null
             })}
           </div>
