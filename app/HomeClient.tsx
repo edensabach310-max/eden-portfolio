@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { useRef, useState, useCallback } from "react"
 import Link from "next/link"
 import ProjectRow from "@/components/ui/ProjectRow"
@@ -24,9 +24,6 @@ interface HomeClientProps {
 
 export default function HomeClient({ productProjects, creativeProjects }: HomeClientProps) {
   const heroRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] })
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 60])
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
 
   const [spawned, setSpawned] = useState<Spawned[]>([])
 
@@ -34,7 +31,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
     if ((e.target as HTMLElement).closest("a, button")) return
     const src = `/stickers/${STICKER_FILES[Math.floor(Math.random() * STICKER_FILES.length)]}`
     const rotate = (Math.random() - 0.5) * 50
-    const size = 90 + Math.floor(Math.random() * 50)
+    const size = 110
     setSpawned((prev) => [
       ...prev.slice(-29),
       { id: Date.now() + Math.random(), src, x: e.clientX, y: e.clientY, size, rotate },
@@ -57,7 +54,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
         className="relative min-h-screen flex flex-col justify-end px-6 md:px-12 pb-20 pt-32 cursor-crosshair"
         style={{ userSelect: "none" }}
       >
-        <motion.div style={{ y: heroY, opacity: heroOpacity }}>
+        <motion.div>
           <motion.p
             className="font-sans text-3xl font-light text-muted mb-10"
             initial={{ opacity: 0 }}

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { STICKER_FILES } from "@/components/ui/Stickers"
 
-const STICKER_SIZE = 120 // consistent size for all stickers on canvas
+const STICKER_SIZE = 120
 
 // ─── Canvas sticker (draggable, fixed size) ───────────────────────────────────
 
@@ -15,7 +15,7 @@ interface CanvasSticker {
   x: number
   y: number
   rotate: number
-  label?: string // for custom text stickers
+  label?: string
 }
 
 function DraggableSticker({ sticker, onRemove }: { sticker: CanvasSticker; onRemove: () => void }) {
@@ -76,13 +76,9 @@ function StickerSlot({
       className="relative flex items-center justify-center"
       style={{ width: 90, height: 90 }}
     >
-      {/* Dotted perforated border */}
       <div
         className="absolute inset-0 rounded-lg"
-        style={{
-          border: "1.5px dashed #D0D0C8",
-          borderRadius: 10,
-        }}
+        style={{ border: "1.5px dashed #D0D0C8", borderRadius: 10 }}
       />
 
       <AnimatePresence>
