@@ -2,9 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* TheBasics — Hebrew characters only */
+@font-face {
+  font-family: "TheBasics";
+  src: url("/fonts/TheBasics-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  unicode-range: U+0590-05FF, U+FB1D-FB4F, U+FD70-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "TheBasics";
+  src: url("/fonts/TheBasics-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  unicode-range: U+0590-05FF, U+FB1D-FB4F, U+FD70-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "TheBasics";
+  src: url("/fonts/TheBasics-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  unicode-range: U+0590-05FF, U+FB1D-FB4F, U+FD70-FDFF, U+FE70-FEFF;
+}
+
 :root {
   --font-serif: var(--font-piazzolla), "Piazzolla", Georgia, serif;
-  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-sans: "TheBasics", var(--font-inter), "Inter", system-ui, sans-serif;
 }
 
 * {
