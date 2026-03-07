@@ -17,7 +17,7 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
   return (
     <Link
       href={`/work/${project.slug.current}`}
-      className="group relative flex items-center border-b-2 border-ink/40 py-2 md:py-3 overflow-x-hidden gap-5 md:gap-7"
+      className="group relative flex items-center border-b-2 border-ink/40 py-2 md:py-3 overflow-x-hidden gap-4 md:gap-7"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       data-cursor
@@ -35,12 +35,16 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
       {/* Index circle — number morphs to arrow on hover */}
       <div
         className="flex-shrink-0 relative z-10 flex items-center justify-center rounded-full overflow-hidden"
-        style={{ width: 84, height: 84, backgroundColor: accent }}
+        style={{
+          width: "clamp(52px, 13vw, 84px)",
+          height: "clamp(52px, 13vw, 84px)",
+          backgroundColor: accent,
+        }}
       >
         {/* Number — slides out upward on hover */}
         <motion.span
           className="absolute font-sans font-medium tabular-nums"
-          style={{ fontSize: "2.7rem", letterSpacing: "-0.04em", color: "#111111", lineHeight: 1 }}
+          style={{ fontSize: "clamp(1.5rem, 4vw, 2.7rem)", letterSpacing: "-0.04em", color: "#111111", lineHeight: 1 }}
           animate={{ y: hovered ? "-110%" : "0%", opacity: hovered ? 0 : 1 }}
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -50,7 +54,7 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
         {/* Arrow — slides in from below on hover */}
         <motion.span
           className="absolute font-sans font-medium"
-          style={{ fontSize: "2.2rem", color: "#111111", lineHeight: 1 }}
+          style={{ fontSize: "clamp(1.2rem, 3.5vw, 2.2rem)", color: "#111111", lineHeight: 1 }}
           animate={{ y: hovered ? "0%" : "110%", opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -63,7 +67,7 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
         <motion.div
           className="font-sans font-medium leading-none"
           style={{
-            fontSize: "clamp(2rem, 5vw, 4.2rem)",
+            fontSize: "clamp(1.5rem, 5vw, 4.2rem)",
             letterSpacing: "-0.03em",
           }}
           animate={{ color: hovered ? accent : "#111111" }}

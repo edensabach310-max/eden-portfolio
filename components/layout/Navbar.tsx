@@ -10,7 +10,6 @@ import ProximityText from "@/components/ui/ProximityText"
 const links = [
   { href: "/#work", label: "Work" },
   { href: "/about", label: "About" },
-  { href: "/play", label: "Stickers" },
 ]
 
 export default function Navbar() {
@@ -26,7 +25,7 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 transition-all duration-500"
+      className="fixed top-0 left-0 right-0 z-[999] px-6 md:px-12 transition-all duration-500"
       style={{
         background: scrolled ? "rgba(250,250,250,0.85)" : "transparent",
         backdropFilter: scrolled ? "blur(6px)" : "none",
@@ -39,14 +38,24 @@ export default function Navbar() {
       <div className="flex items-center justify-between py-5">
         {/* Logo */}
         <Link href="/" className="text-ink">
-          <ProximityText
-            text="Eden Fainberg Sabach"
-            style={{ fontSize: "1.875rem", letterSpacing: "-0.01em", fontWeight: 300 }}
-          />
+          {/* Desktop: proximity text animation */}
+          <span className="hidden md:inline">
+            <ProximityText
+              text="Eden Fainberg Sabach"
+              style={{ fontSize: "1.875rem", letterSpacing: "-0.01em", fontWeight: 300 }}
+            />
+          </span>
+          {/* Mobile: simple name */}
+          <span
+            className="md:hidden font-sans font-light"
+            style={{ fontSize: "1.125rem", letterSpacing: "-0.01em" }}
+          >
+            Eden Sabach
+          </span>
         </Link>
 
-        {/* Nav links — simple underline hover */}
-        <nav className="flex items-center gap-8 font-sans text-3xl font-light">
+        {/* Nav links */}
+        <nav className="flex items-center gap-5 md:gap-8 font-sans text-sm md:text-3xl font-light">
           {links.map((link) => {
             const active =
               (link.href === "/#work" && pathname === "/") ||
