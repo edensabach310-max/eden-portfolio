@@ -31,7 +31,7 @@ function AutoplayVideo({ src, caption }: { src: string; caption?: string }) {
   }, [youtubeId])
 
   return (
-    <div className="my-8 md:my-12">
+    <div className="my-8 md:my-12 md:max-w-[66%]">
       {youtubeId ? (
         <iframe
           src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&modestbranding=1`}
@@ -64,7 +64,7 @@ interface Props {
 
 function SectionBlock({ label, text }: { label?: string; text: string }) {
   return (
-    <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
+    <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12 md:max-w-[66%]">
       <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
         <div>
           {label && (
@@ -94,8 +94,8 @@ function ImageBlock({
     alignment === "full"
       ? "my-8 md:my-12 w-full"
       : alignment === "right"
-      ? "my-8 md:my-12 w-full md:w-2/3 ml-auto"
-      : "my-8 md:my-12 w-full md:w-2/3 mr-auto"
+      ? "my-8 md:my-12 w-full md:max-w-[66%] ml-auto"
+      : "my-8 md:my-12 w-full md:max-w-[66%]"
 
   return (
     <div className={wrapperClass}>
@@ -123,7 +123,7 @@ function ImagePairBlock({
   caption?: string
 }) {
   return (
-    <div className="my-8 md:my-12">
+    <div className="my-8 md:my-12 md:max-w-[66%]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="relative aspect-video overflow-hidden bg-card/30">
           <Image src={leftSrc} alt={leftAlt} fill className="object-cover" sizes="50vw" />
@@ -141,7 +141,7 @@ function ImagePairBlock({
 
 function FigmaEmbed({ url, caption }: { url: string; caption?: string }) {
   return (
-    <div className="my-8 md:my-12">
+    <div className="my-8 md:my-12 md:max-w-[66%]">
       <div className="overflow-hidden border border-card">
         <iframe
           src={url}
@@ -160,7 +160,7 @@ function FigmaEmbed({ url, caption }: { url: string; caption?: string }) {
 
 function MetricBlock({ metrics }: { metrics: { label: string; value: string }[] }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 my-8 md:my-12 p-6 md:p-8 bg-card/40">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 my-8 md:my-12 p-6 md:p-8 bg-card/40 md:max-w-[66%]">
       {metrics.map((m, i) => (
         <div key={i} className="text-center">
           <div
