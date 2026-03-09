@@ -126,6 +126,46 @@ export const projectSchema = defineType({
         },
         {
           type: "object",
+          name: "sectionWithMedia",
+          title: "Text + Image Side by Side",
+          fields: [
+            defineField({
+              name: "label",
+              title: "Label",
+              type: "string",
+              description: "Optional section label (leave blank for none)",
+            }),
+            defineField({ name: "text", title: "Content", type: "text", rows: 6 }),
+            defineField({
+              name: "image",
+              title: "Image (optional)",
+              type: "image",
+              options: { hotspot: true },
+              fields: [defineField({ name: "alt", title: "Alt text", type: "string" })],
+            }),
+            defineField({
+              name: "videoUrl",
+              title: "Video URL — YouTube / Vimeo (optional)",
+              type: "url",
+              description: "Use instead of image — or leave empty and upload a file below",
+            }),
+            defineField({
+              name: "videoFile",
+              title: "Video File — mp4 / mov (optional)",
+              type: "file",
+              options: { accept: "video/*" },
+            }),
+            defineField({ name: "caption", title: "Caption", type: "string" }),
+          ],
+          preview: {
+            select: { title: "label", subtitle: "text", media: "image" },
+            prepare({ title, subtitle, media }) {
+              return { title: title || "Text + Image", subtitle, media }
+            },
+          },
+        },
+        {
+          type: "object",
           name: "textBlock",
           title: "Plain Text",
           fields: [
@@ -198,8 +238,34 @@ export const projectSchema = defineType({
           name: "videoBlock",
           title: "Video",
           fields: [
-            defineField({ name: "url", title: "Video URL (YouTube/Vimeo)", type: "url" }),
+            defineField({
+              name: "url",
+              title: "Video URL (YouTube / Vimeo)",
+              type: "url",
+              description: "Paste a YouTube or Vimeo link — OR leave empty and upload a file below",
+            }),
+            defineField({
+              name: "file",
+              title: "Video File (mp4 / mov)",
+              type: "file",
+              description: "Upload directly if you don't have a YouTube/Vimeo link",
+              options: { accept: "video/*" },
+            }),
             defineField({ name: "caption", title: "Caption", type: "string" }),
+            defineField({
+              name: "size",
+              title: "Size",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Full width", value: "full" },
+                  { title: "Medium (2/3 width)", value: "medium" },
+                  { title: "Small (portrait / screen recording)", value: "small" },
+                ],
+                layout: "radio",
+              },
+              initialValue: "full",
+            }),
           ],
         },
         {

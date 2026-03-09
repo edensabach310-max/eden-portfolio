@@ -90,7 +90,7 @@ export default function AboutPage() {
     <div className="min-h-screen pt-24 md:pt-32 pb-24 md:pb-32 px-6 md:px-12">
 
       {/* Header */}
-      <div className="mb-12 md:mb-20">
+      <div className="mb-8 md:mb-20">
         <motion.p
           className="t-body text-base md:text-3xl text-muted mb-4 md:mb-6"
           initial={{ opacity: 0, y: 10 }}
@@ -107,6 +107,21 @@ export default function AboutPage() {
         />
       </div>
 
+      {/* Mobile photos — below heading, above bio */}
+      <motion.div
+        className="md:hidden flex gap-3 mb-10 overflow-x-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="shrink-0 w-[48%]">
+          <Image src="/about/photo-1.png" alt="Eden Sabach" width={240} height={340} className="w-full h-auto object-contain" />
+        </div>
+        <div className="shrink-0 w-[48%]">
+          <Image src="/about/photo-2.png" alt="Eden Sabach" width={240} height={340} className="w-full h-auto object-contain" />
+        </div>
+      </motion.div>
+
       {/* Bio + photo */}
       <div className="grid grid-cols-1 md:grid-cols-[1fr_520px] gap-12 md:gap-16 mb-16 md:mb-24">
         <motion.div
@@ -114,12 +129,12 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="font-sans text-base md:text-3xl font-extralight text-ink leading-[3.4] max-w-2xl mb-6 md:mb-8">
+          <p className="t-body text-base md:text-3xl text-ink max-w-2xl mb-6 md:mb-8">
             Product Designer, currently at Lightricks.
             <br /><br />
             I design systems and experiences shaped by real behavior &mdash; making complex things feel obvious.
           </p>
-          <p className="font-sans text-base md:text-3xl font-extralight text-muted leading-[3.4] max-w-2xl">
+          <p className="t-body text-base md:text-3xl text-muted max-w-2xl">
             Based in Tel Aviv. I look for inspiration in technology, culture, and city streets &mdash;
             usually on walks with Kali 🐕‍🦺
             <br /><br />

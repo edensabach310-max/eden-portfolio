@@ -12,9 +12,9 @@ function getYouTubeId(url: string): string | null {
   return match ? match[1] : null
 }
 
-function AutoplayVideo({ src, caption }: { src: string; caption?: string }) {
+function AutoplayVideo({ src, caption, size = "full" }: { src: string; caption?: string; size?: "full" | "medium" | "small" }) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const youtubeId = getYouTubeId(src)
+  const youtubeId = src ? getYouTubeId(src) : null
 
   useEffect(() => {
     const video = videoRef.current
@@ -30,8 +30,15 @@ function AutoplayVideo({ src, caption }: { src: string; caption?: string }) {
     return () => observer.disconnect()
   }, [youtubeId])
 
+  const wrapperClass =
+    size === "small"
+      ? "my-8 md:my-12 w-full md:max-w-[340px]"
+      : size === "medium"
+      ? "my-8 md:my-12 w-full md:max-w-[66%]"
+      : "my-8 md:my-12 w-full"
+
   return (
-    <div className="my-8 md:my-12 md:max-w-[66%]">
+    <div className={wrapperClass}>
       {youtubeId ? (
         <iframe
           src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&modestbranding=1`}
@@ -80,6 +87,99 @@ function SectionBlock({ label, text }: { label?: string; text: string }) {
   )
 }
 
+function SectionWithMediaBlock({
+  label,
+  text,
+  imageSrc,
+  imageAlt,
+  videoSrc,
+  caption,
+}: {
+  label?: string
+  text: string
+  imageSrc?: string
+  imageAlt?: string
+  videoSrc?: string
+  caption?: string
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const youtubeId = videoSrc ? getYouTubeId(videoSrc) : null
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || youtubeId) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {})
+        else video.pause()
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [youtubeId])
+
+  const media = (
+    <div className="bg-card/30">
+      {videoSrc ? (
+        youtubeId ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&modestbranding=1`}
+            className="w-full aspect-video"
+            allow="autoplay; fullscreen"
+            style={{ border: "none" }}
+            title="video"
+          />
+        ) : (
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            muted
+            playsInline
+            loop
+            className="w-full"
+            style={{ aspectRatio: "auto" }}
+          />
+        )
+      ) : imageSrc ? (
+        <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto" />
+      ) : null}
+    </div>
+  )
+
+  return (
+    <div className="relative border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
+      {/* Desktop: media absolute-right so it doesn't stretch the section height */}
+      <div className="hidden md:block absolute top-8 right-0 w-[280px]">
+        {media}
+        {caption && (
+          <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
+        )}
+      </div>
+
+      {/* Text — constrained so it doesn't run under the absolute media */}
+      <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8 md:pr-[316px]">
+        <div>
+          {label && (
+            <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
+          )}
+        </div>
+        <div className="t-body text-base md:text-3xl text-ink">
+          <p>{text}</p>
+        </div>
+      </div>
+
+      {/* Mobile: media below text */}
+      <div className="md:hidden mt-6">
+        {media}
+        {caption && (
+          <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function ImageBlock({
   src,
   alt,
@@ -100,8 +200,8 @@ function ImageBlock({
 
   return (
     <div className={wrapperClass}>
-      <div className="relative aspect-video overflow-hidden bg-card/30">
-        <Image src={src} alt={alt} fill className="object-cover" sizes={alignment === "full" ? "100vw" : "66vw"} />
+      <div className="bg-card/30">
+        <Image src={src} alt={alt} width={0} height={0} sizes="100vw" className="w-full h-auto" />
       </div>
       {caption && (
         <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
@@ -126,11 +226,11 @@ function ImagePairBlock({
   return (
     <div className="my-8 md:my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div className="relative aspect-video overflow-hidden bg-card/30">
-          <Image src={leftSrc} alt={leftAlt} fill className="object-cover" sizes="50vw" />
+        <div className="bg-card/30">
+          <Image src={leftSrc} alt={leftAlt} width={0} height={0} sizes="50vw" className="w-full h-auto" />
         </div>
-        <div className="relative aspect-video overflow-hidden bg-card/30">
-          <Image src={rightSrc} alt={rightAlt} fill className="object-cover" sizes="50vw" />
+        <div className="bg-card/30">
+          <Image src={rightSrc} alt={rightAlt} width={0} height={0} sizes="50vw" className="w-full h-auto" />
         </div>
       </div>
       {caption && (
@@ -290,6 +390,11 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
             return <SectionBlock key={block._key} label={block.label} text={block.text} />
           if (block._type === "textBlock")
             return <SectionBlock key={block._key} text={block.text} />
+          if (block._type === "sectionWithMedia") {
+            const imageSrc = (block.image as unknown as { url: string })?.url || ""
+            const videoSrc = block.videoUrl || block.videoFileUrl || ""
+            return <SectionWithMediaBlock key={block._key} label={block.label} text={block.text} imageSrc={imageSrc} imageAlt={block.image?.alt || ""} videoSrc={videoSrc || undefined} caption={block.caption} />
+          }
           if (block._type === "imageBlock") {
             const src = (block.image as unknown as { url: string }).url || ""
             // alignment field takes precedence; fall back to legacy fullWidth boolean
@@ -305,8 +410,10 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
             return <FigmaEmbed key={block._key} url={block.embedUrl} caption={block.caption} />
           if (block._type === "metricBlock")
             return <MetricBlock key={block._key} metrics={block.metrics} />
-          if (block._type === "videoBlock")
-            return <AutoplayVideo key={block._key} src={block.url} caption={block.caption} />
+          if (block._type === "videoBlock") {
+            const src = block.url || block.fileUrl || ""
+            return <AutoplayVideo key={block._key} src={src} caption={block.caption} size={block.size} />
+          }
           return null
         })}
 

@@ -50,6 +50,15 @@ export async function getProjectBySlug(slug: string) {
           ...,
           "left": left { ..., "url": asset->url },
           "right": right { ..., "url": asset->url }
+        },
+        _type == "sectionWithMedia" => {
+          ...,
+          "image": image { ..., "url": asset->url },
+          "videoFileUrl": videoFile.asset->url
+        },
+        _type == "videoBlock" => {
+          ...,
+          "fileUrl": file.asset->url
         }
       },
       featured, order
