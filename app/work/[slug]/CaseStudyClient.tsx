@@ -71,7 +71,7 @@ function SectionBlock({ label, text }: { label?: string; text: string }) {
             <span className="font-sans text-sm md:text-3xl font-light text-muted">{label}</span>
           )}
         </div>
-        <div className="font-sans text-base md:text-xl font-light text-ink leading-relaxed">
+        <div className="font-sans text-base md:text-2xl font-light text-ink leading-relaxed">
           <p>{text}</p>
         </div>
       </div>
@@ -160,7 +160,7 @@ function FigmaEmbed({ url, caption }: { url: string; caption?: string }) {
 
 function MetricBlock({ metrics }: { metrics: { label: string; value: string }[] }) {
   return (
-    <div className="border-t border-b border-card py-8 my-10 md:my-14 md:max-w-[66%]">
+    <div className="py-4 my-8 md:my-10 md:max-w-[66%]">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
         {metrics.map((m, i) => (
           <div key={i}>

@@ -114,12 +114,12 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="font-sans text-base md:text-xl font-light text-ink leading-relaxed max-w-2xl mb-6 md:mb-8">
+          <p className="font-sans text-base md:text-2xl font-light text-ink leading-relaxed max-w-2xl mb-6 md:mb-8">
             Product Designer, currently at Lightricks.
             <br /><br />
             I design systems and experiences shaped by real behavior &mdash; making complex things feel obvious.
           </p>
-          <p className="font-sans text-base md:text-xl font-light text-muted leading-relaxed max-w-2xl">
+          <p className="font-sans text-base md:text-2xl font-light text-muted leading-relaxed max-w-2xl">
             Based in Tel Aviv. I look for inspiration in technology, culture, and city streets &mdash;
             usually on walks with Kali 🐕‍🦺
             <br /><br />
