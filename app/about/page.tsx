@@ -109,16 +109,22 @@ export default function AboutPage() {
 
       {/* Mobile photos — below heading, above bio */}
       <motion.div
-        className="md:hidden flex gap-3 mb-10 overflow-x-auto"
+        className="md:hidden flex gap-3 mb-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="shrink-0 w-[48%]">
+        <div className="relative shrink-0 w-[48%]">
           <Image src="/about/photo-1.png" alt="Eden Sabach" width={240} height={340} className="w-full h-auto object-contain" />
+          <div className="absolute pointer-events-none" style={{ top: -20, left: "35%", width: 44, height: 44, transform: "rotate(-8deg)" }}>
+            <Image src="/stickers/smiley.png" alt="" fill className="object-contain" />
+          </div>
         </div>
-        <div className="shrink-0 w-[48%]">
+        <div className="relative shrink-0 w-[48%]">
           <Image src="/about/photo-2.png" alt="Eden Sabach" width={240} height={340} className="w-full h-auto object-contain" />
+          <div className="absolute pointer-events-none" style={{ top: -20, left: "40%", width: 44, height: 44, transform: "rotate(28deg)" }}>
+            <Image src="/stickers/smiley.png" alt="" fill className="object-contain" />
+          </div>
         </div>
       </motion.div>
 
