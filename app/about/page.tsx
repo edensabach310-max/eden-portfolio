@@ -223,6 +223,20 @@ export default function AboutPage() {
               accent: "#0057FF",
             },
             {
+              role: "Teaching Assistant",
+              place: "Bezalel Academy of Arts and Design",
+              products: "Year D Book Design Studio · with Michal Sahar",
+              period: "2025 – 2026",
+              accent: "#C8F135",
+            },
+            {
+              role: "Teaching Assistant",
+              place: "Bezalel Academy of Arts and Design",
+              products: "Year D Total Design Studio · with Michal Sahar",
+              period: "2024 – 2025",
+              accent: "#C8F135",
+            },
+            {
               role: "B.Des Graphic Design",
               place: "Bezalel Academy of Arts and Design",
               products: "Jerusalem",
