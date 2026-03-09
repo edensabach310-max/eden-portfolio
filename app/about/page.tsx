@@ -92,7 +92,7 @@ export default function AboutPage() {
       {/* Header */}
       <div className="mb-12 md:mb-20">
         <motion.p
-          className="font-sans text-base md:text-3xl font-light text-muted mb-4 md:mb-6"
+          className="t-body text-base md:text-3xl text-muted mb-4 md:mb-6"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -114,12 +114,12 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="font-sans text-base md:text-3xl font-light text-ink leading-[2.2] max-w-2xl mb-6 md:mb-8">
+          <p className="font-sans text-base md:text-3xl font-extralight text-ink leading-[3.4] max-w-2xl mb-6 md:mb-8">
             Product Designer, currently at Lightricks.
             <br /><br />
             I design systems and experiences shaped by real behavior &mdash; making complex things feel obvious.
           </p>
-          <p className="font-sans text-base md:text-3xl font-light text-muted leading-[2.2] max-w-2xl">
+          <p className="font-sans text-base md:text-3xl font-extralight text-muted leading-[3.4] max-w-2xl">
             Based in Tel Aviv. I look for inspiration in technology, culture, and city streets &mdash;
             usually on walks with Kali 🐕‍🦺
             <br /><br />
@@ -139,19 +139,19 @@ export default function AboutPage() {
           viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="font-sans text-base md:text-3xl font-light text-muted mb-4 md:mb-6">Skills</h2>
+          <h2 className="t-body text-base md:text-3xl text-muted mb-4 md:mb-6">Skills</h2>
           <ul className="space-y-2 md:space-y-3">
             {about.skills.map((skill, i) => (
               <motion.li
                 key={skill}
-                className="font-sans text-xl md:text-3xl font-light text-ink border-b border-card pb-2 md:pb-3 last:border-0 flex items-center justify-between group"
+                className="t-body text-xl md:text-3xl text-ink border-b border-card pb-2 md:pb-3 last:border-0 flex items-center justify-between group"
                 initial={{ opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
               >
                 {skill}
-                <span className="font-sans text-base md:text-3xl font-light text-muted opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="t-body text-base md:text-3xl text-muted opacity-0 group-hover:opacity-100 transition-opacity">
                   0{i + 1}
                 </span>
               </motion.li>
@@ -165,12 +165,12 @@ export default function AboutPage() {
           viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="font-sans text-base md:text-3xl font-light text-muted mb-4 md:mb-6">Tools</h2>
+          <h2 className="t-body text-base md:text-3xl text-muted mb-4 md:mb-6">Tools</h2>
           <div className="flex flex-wrap gap-2 md:gap-3">
             {about.tools.map((tool, i) => (
               <motion.span
                 key={tool}
-                className="font-sans text-sm md:text-3xl font-light px-3 md:px-5 py-1.5 md:py-2 border border-card rounded-full text-muted hover:border-ink hover:text-ink transition-colors duration-200"
+                className="t-body text-sm md:text-3xl px-3 md:px-5 py-1.5 md:py-2 border border-card rounded-full text-muted hover:border-ink hover:text-ink transition-colors duration-200"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0 }}
@@ -191,7 +191,7 @@ export default function AboutPage() {
         viewport={{ once: true, amount: 0 }}
         transition={{ duration: 0.7 }}
       >
-        <h2 className="font-sans text-base md:text-3xl font-light text-muted mb-6 md:mb-8">Experience</h2>
+        <h2 className="t-body text-base md:text-3xl text-muted mb-6 md:mb-8">Experience</h2>
         <div className="space-y-6 md:space-y-8">
           {[
             {
@@ -216,11 +216,11 @@ export default function AboutPage() {
                   style={{ backgroundColor: item.accent }}
                 />
                 <div>
-                  <div className="font-sans text-xl md:text-3xl font-light text-ink">{item.role}</div>
-                  <div className="font-sans text-base md:text-3xl font-light text-muted">{item.place} · {item.products}</div>
+                  <div className="t-body text-xl md:text-3xl text-ink">{item.role}</div>
+                  <div className="t-body text-base md:text-3xl text-muted">{item.place} · {item.products}</div>
                 </div>
               </div>
-              <div className="font-sans text-base md:text-3xl font-light text-muted ml-6 md:ml-0">{item.period}</div>
+              <div className="t-body text-base md:text-3xl text-muted ml-6 md:ml-0">{item.period}</div>
             </div>
           ))}
         </div>
@@ -237,14 +237,14 @@ export default function AboutPage() {
         <div className="flex flex-col md:flex-row items-start md:items-center gap-8 justify-between">
           <div>
             <h2 className="font-sans font-light text-ink mb-2" style={{ fontSize: "clamp(1.75rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}>Say hello.</h2>
-            <p className="font-sans text-xl md:text-3xl font-light text-muted">Always open to interesting projects and conversations.</p>
+            <p className="t-body text-xl md:text-3xl text-muted">Always open to interesting projects and conversations.</p>
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 md:gap-6">
             <Link
               href={`mailto:${about.email}`}
               data-cursor
               data-cursor-label="Email"
-              className="font-sans text-sm md:text-3xl font-light border border-ink text-ink px-5 md:px-6 py-2.5 md:py-3 hover:bg-ink hover:text-bg transition-colors duration-300 break-all"
+              className="t-body text-sm md:text-3xl border border-ink text-ink px-5 md:px-6 py-2.5 md:py-3 hover:bg-ink hover:text-bg transition-colors duration-300 break-all"
             >
               {about.email}
             </Link>
@@ -252,7 +252,7 @@ export default function AboutPage() {
               href={about.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-sans text-base md:text-3xl font-light text-muted hover:text-ink transition-colors hover-underline"
+              className="t-body text-base md:text-3xl text-muted hover:text-ink transition-colors hover-underline"
             >
               LinkedIn →
             </Link>

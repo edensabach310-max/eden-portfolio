@@ -20,7 +20,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
       <section className="relative min-h-screen flex flex-col justify-end px-6 md:px-12 pb-20 pt-32">
         <motion.div>
           <motion.p
-            className="font-sans text-xl md:text-3xl font-light text-muted mb-10"
+            className="t-body text-xl md:text-3xl text-muted mb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -61,7 +61,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
 
           <div className="flex flex-col md:flex-row md:items-end justify-between mt-10 gap-6">
             <motion.p
-              className="font-sans text-xl md:text-3xl font-light text-muted max-w-xl leading-normal"
+              className="t-body text-xl md:text-3xl text-muted max-w-xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.55 }}
@@ -77,7 +77,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
             >
               <Link
                 href="/about"
-                className="font-sans text-xl md:text-3xl font-light text-muted hover:text-ink transition-colors hover-underline"
+                className="t-body text-xl md:text-3xl text-muted hover:text-ink transition-colors hover-underline"
               >
                 About me ↓
               </Link>
@@ -101,10 +101,10 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
       {/* ── Work Section ───────────────────────────────────── */}
       <section id="work" className="px-6 md:px-12 pt-12 pb-8">
         <div className="flex items-baseline justify-between border-b-2 border-ink pb-4 mb-0">
-          <span className="font-sans text-xl md:text-3xl font-light text-ink">
+          <span className="t-body text-xl md:text-3xl text-ink">
             Selected Work
           </span>
-          <span className="font-sans text-xl md:text-3xl font-light text-muted">{productProjects.length} projects</span>
+          <span className="t-body text-xl md:text-3xl text-muted">{productProjects.length} projects</span>
         </div>
 
         {productProjects.map((project, i) => (
@@ -115,10 +115,10 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
       {/* ── Creative / Play ────────────────────────────────── */}
       <section className="px-6 md:px-12 pt-12 pb-24">
         <div className="flex items-baseline justify-between border-b-2 border-ink pb-4 mb-0">
-          <span className="font-sans text-xl md:text-3xl font-light text-ink">
+          <span className="t-body text-xl md:text-3xl text-ink">
             <span className="text-muted">(not a product)</span> design projects
           </span>
-          <span className="font-sans text-xl md:text-3xl font-light text-muted">{creativeProjects.length} projects</span>
+          <span className="t-body text-xl md:text-3xl text-muted">{creativeProjects.length} projects</span>
         </div>
 
         {creativeProjects.map((project, i) => (
@@ -138,7 +138,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
             href="mailto:eden@example.com"
             data-cursor
             data-cursor-label="Email"
-            className="font-sans text-base md:text-3xl font-light border border-ink text-ink px-6 md:px-8 py-3 md:py-4 hover:bg-ink hover:text-bg transition-colors duration-300"
+            className="t-body text-base md:text-3xl border border-ink text-ink px-6 md:px-8 py-3 md:py-4 hover:bg-ink hover:text-bg transition-colors duration-300"
           >
             Get in touch
           </Link>

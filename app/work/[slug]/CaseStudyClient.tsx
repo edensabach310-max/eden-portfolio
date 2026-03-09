@@ -50,7 +50,7 @@ function AutoplayVideo({ src, caption }: { src: string; caption?: string }) {
           className="w-full aspect-video bg-card/30"
         />
       )}
-      {caption && <p className="font-sans text-sm md:text-3xl font-light text-muted mt-3">{caption}</p>}
+      {caption && <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>}
     </div>
   )
 }
@@ -68,10 +68,10 @@ function SectionBlock({ label, text }: { label?: string; text: string }) {
       <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
         <div>
           {label && (
-            <span className="font-sans text-sm md:text-3xl font-light text-muted">{label}</span>
+            <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
           )}
         </div>
-        <div className="font-sans text-base md:text-3xl font-light text-ink leading-[2.2]">
+        <div className="t-body text-base md:text-3xl text-ink">
           <p>{text}</p>
         </div>
       </div>
@@ -103,7 +103,7 @@ function ImageBlock({
         <Image src={src} alt={alt} fill className="object-cover" sizes={alignment === "full" ? "100vw" : "66vw"} />
       </div>
       {caption && (
-        <p className="font-sans text-sm md:text-3xl font-light text-muted mt-3">{caption}</p>
+        <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
       )}
     </div>
   )
@@ -133,7 +133,7 @@ function ImagePairBlock({
         </div>
       </div>
       {caption && (
-        <p className="font-sans text-sm md:text-3xl font-light text-muted mt-3">{caption}</p>
+        <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
       )}
     </div>
   )
@@ -152,7 +152,7 @@ function FigmaEmbed({ url, caption }: { url: string; caption?: string }) {
         />
       </div>
       {caption && (
-        <p className="font-sans text-sm md:text-3xl font-light text-muted mt-3">{caption}</p>
+        <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
       )}
     </div>
   )
@@ -170,7 +170,7 @@ function MetricBlock({ metrics }: { metrics: { label: string; value: string }[] 
             >
               {m.value}
             </div>
-            <div className="font-sans text-xs uppercase tracking-widest text-muted mt-3 leading-snug">
+            <div className="t-body text-xs uppercase tracking-widest text-muted mt-3" style={{ lineHeight: 1.3 }}>
               {m.label}
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
     <div className="min-h-screen pt-24 md:pt-32 pb-24 md:pb-32">
       {/* Back */}
       <div className="px-6 md:px-12 mb-10 md:mb-16">
-        <Link href="/" className="font-sans text-base md:text-3xl font-light text-muted hover:text-ink transition-colors hover-underline">
+        <Link href="/" className="t-body text-base md:text-3xl text-muted hover:text-ink transition-colors hover-underline">
           ← All work
         </Link>
       </div>
@@ -202,7 +202,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
       {/* Hero text */}
       <div className="px-6 md:px-12">
         <motion.p
-          className="font-sans text-base md:text-3xl font-light text-muted mb-6 md:mb-8"
+          className="t-body text-base md:text-3xl text-muted mb-6 md:mb-8"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -218,7 +218,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
         />
 
         <motion.p
-          className="font-sans text-xl md:text-3xl font-light text-muted max-w-3xl leading-normal mb-10 md:mb-16"
+          className="t-body text-xl md:text-3xl text-muted max-w-3xl mb-10 md:mb-16"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -241,8 +241,8 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
             .filter(Boolean)
             .map((meta) => (
               <div key={meta!.label}>
-                <div className="font-sans text-xs md:text-3xl font-light text-muted mb-1 uppercase tracking-widest md:tracking-normal md:normal-case">{meta!.label}</div>
-                <div className="font-sans text-base md:text-3xl font-light text-ink">{meta!.value}</div>
+                <div className="t-body text-xs md:text-3xl text-muted mb-1 uppercase tracking-widest md:tracking-normal md:normal-case">{meta!.label}</div>
+                <div className="t-body text-base md:text-3xl text-ink">{meta!.value}</div>
               </div>
             ))}
         </motion.div>
@@ -324,9 +324,9 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
       <div className="px-6 md:px-12 mt-16 md:mt-24 pt-8 md:pt-12 border-t border-card">
         {nextProject ? (
           <Link href={`/work/${nextProject.slug.current}`} className="group flex items-center justify-between">
-            <span className="font-sans text-sm md:text-3xl font-light text-muted">Next project</span>
+            <span className="t-body text-sm md:text-3xl text-muted">Next project</span>
             <motion.span
-              className="font-sans font-bold text-ink"
+              className="font-sans font-light text-ink"
               style={{ fontSize: "clamp(1.5rem, 4vw, 3.5rem)", letterSpacing: "-0.03em" }}
               whileHover={{ x: 8 }}
               transition={{ duration: 0.2 }}
@@ -336,9 +336,9 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
           </Link>
         ) : (
           <Link href="/" className="group flex items-center justify-between">
-            <span className="font-sans text-sm md:text-3xl font-light text-muted">More work</span>
+            <span className="t-body text-sm md:text-3xl text-muted">More work</span>
             <motion.span
-              className="font-sans font-bold text-ink"
+              className="font-sans font-light text-ink"
               style={{ fontSize: "clamp(1.5rem, 4vw, 3.5rem)", letterSpacing: "-0.03em" }}
               whileHover={{ x: 8 }}
               transition={{ duration: 0.2 }}

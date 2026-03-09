@@ -66,6 +66,18 @@ body {
   background: #8C8C8C;
 }
 
+/**
+ * t-body — unified text style for ALL running text, UI labels, and nav links.
+ * Defined outside any @layer so it always beats Tailwind's layered utilities
+ * (e.g. text-3xl sets its own line-height which would otherwise win).
+ * To change weight or leading site-wide, edit here only.
+ */
+.t-body {
+  font-family: var(--font-sans);
+  font-weight: 200; /* extralight */
+  line-height: 1.5 !important;
+}
+
 @layer utilities {
   .font-display {
     font-family: var(--font-sans);

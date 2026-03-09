@@ -160,15 +160,15 @@ export default function StickersPage() {
       {/* Header */}
       <div className="mb-12 flex items-end justify-between">
         <div>
-          <p className="font-sans text-3xl font-light text-ink">Stickers</p>
-          <p className="font-sans text-3xl font-light text-muted/50 mt-1">
+          <p className="t-body text-3xl text-ink">Stickers</p>
+          <p className="t-body text-3xl text-muted/50 mt-1">
             peel · drag · double-click to remove
           </p>
         </div>
         {peeled.size > 0 && (
           <button
             onClick={resetSheet}
-            className="font-sans text-3xl font-light text-muted hover:text-ink transition-colors"
+            className="t-body text-3xl text-muted hover:text-ink transition-colors"
           >
             reset
           </button>
@@ -210,7 +210,7 @@ export default function StickersPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="font-sans text-3xl font-light text-muted">Create a sticker</p>
+          <p className="t-body text-3xl text-muted">Create a sticker</p>
           <div className="flex items-center gap-3">
             <input
               ref={inputRef}
@@ -220,16 +220,16 @@ export default function StickersPage() {
               onKeyDown={(e) => e.key === "Enter" && createTextSticker()}
               placeholder="type anything..."
               maxLength={24}
-              className="font-sans text-xl font-light text-ink bg-transparent border-b border-ink/30 focus:border-ink outline-none pb-1 w-52 placeholder:text-muted/40 transition-colors"
+              className="t-body text-xl text-ink bg-transparent border-b border-ink/30 focus:border-ink outline-none pb-1 w-52 placeholder:text-muted/40 transition-colors"
             />
             <button
               onClick={createTextSticker}
-              className="font-sans text-3xl font-light text-muted hover:text-ink transition-colors"
+              className="t-body text-3xl text-muted hover:text-ink transition-colors"
             >
               →
             </button>
           </div>
-          <p className="font-sans text-xl font-light text-muted/40">press enter or →</p>
+          <p className="t-body text-xl text-muted/40">press enter or →</p>
         </motion.div>
 
       </div>
