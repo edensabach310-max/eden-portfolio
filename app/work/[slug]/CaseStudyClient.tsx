@@ -201,15 +201,6 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
 
       {/* Hero text */}
       <div className="px-6 md:px-12">
-        <motion.p
-          className="t-body text-base md:text-3xl text-muted mb-6 md:mb-8"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {project.category === "product" ? "Product Design" : "Creative"} · {project.year}
-        </motion.p>
-
         <AnimatedText
           text={project.title}
           className="font-sans font-light text-ink mb-6 md:mb-8"
@@ -221,7 +212,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
           className="t-body text-xl md:text-3xl text-muted max-w-3xl mb-10 md:mb-16"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           {project.tagline}
         </motion.p>
