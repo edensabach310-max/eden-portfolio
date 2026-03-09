@@ -71,7 +71,7 @@ function SectionBlock({ label, text }: { label?: string; text: string }) {
             <span className="font-sans text-sm md:text-3xl font-light text-muted">{label}</span>
           )}
         </div>
-        <div className="font-sans text-base md:text-3xl font-light text-ink leading-relaxed">
+        <div className="font-sans text-base md:text-3xl font-light text-ink leading-loose">
           <p>{text}</p>
         </div>
       </div>
