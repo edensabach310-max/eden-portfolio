@@ -71,7 +71,7 @@ function SectionBlock({ label, text }: { label?: string; text: string }) {
             <span className="font-sans text-sm md:text-3xl font-light text-muted">{label}</span>
           )}
         </div>
-        <div className="font-sans text-xl md:text-3xl font-light text-ink leading-normal">
+        <div className="font-sans text-base md:text-xl font-light text-ink leading-relaxed">
           <p>{text}</p>
         </div>
       </div>
@@ -160,18 +160,22 @@ function FigmaEmbed({ url, caption }: { url: string; caption?: string }) {
 
 function MetricBlock({ metrics }: { metrics: { label: string; value: string }[] }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 my-8 md:my-12 p-6 md:p-8 bg-card/40 md:max-w-[66%]">
-      {metrics.map((m, i) => (
-        <div key={i} className="text-center">
-          <div
-            className="font-sans font-bold text-ink mb-1"
-            style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)", letterSpacing: "-0.03em" }}
-          >
-            {m.value}
+    <div className="border-t border-b border-card py-8 my-10 md:my-14 md:max-w-[66%]">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {metrics.map((m, i) => (
+          <div key={i}>
+            <div
+              className="font-sans font-light text-ink"
+              style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", letterSpacing: "-0.04em", lineHeight: 1 }}
+            >
+              {m.value}
+            </div>
+            <div className="font-sans text-xs uppercase tracking-widest text-muted mt-3 leading-snug">
+              {m.label}
+            </div>
           </div>
-          <div className="font-sans text-sm md:text-3xl font-light text-muted">{m.label}</div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }
