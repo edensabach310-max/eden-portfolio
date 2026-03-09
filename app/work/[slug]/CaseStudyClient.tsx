@@ -47,7 +47,8 @@ function AutoplayVideo({ src, caption }: { src: string; caption?: string }) {
           muted
           playsInline
           loop
-          className="w-full aspect-video bg-card/30"
+          className="w-full bg-card/30"
+          style={{ aspectRatio: "auto" }}
         />
       )}
       {caption && <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>}
@@ -123,7 +124,7 @@ function ImagePairBlock({
   caption?: string
 }) {
   return (
-    <div className="my-8 md:my-12 md:max-w-[66%]">
+    <div className="my-8 md:my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="relative aspect-video overflow-hidden bg-card/30">
           <Image src={leftSrc} alt={leftAlt} fill className="object-cover" sizes="50vw" />
