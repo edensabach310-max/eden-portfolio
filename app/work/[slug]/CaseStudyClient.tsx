@@ -120,7 +120,7 @@ function SectionWithMediaBlock({
   }, [youtubeId])
 
   const media = (
-    <div className="bg-card/30">
+    <div>
       {videoSrc ? (
         youtubeId ? (
           <iframe
@@ -200,7 +200,7 @@ function ImageBlock({
 
   return (
     <div className={wrapperClass}>
-      <div className="bg-card/30">
+      <div>
         <Image src={src} alt={alt} width={0} height={0} sizes="100vw" className="w-full h-auto" />
       </div>
       {caption && (
@@ -226,10 +226,10 @@ function ImagePairBlock({
   return (
     <div className="my-8 md:my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div className="bg-card/30">
+        <div>
           <Image src={leftSrc} alt={leftAlt} width={0} height={0} sizes="50vw" className="w-full h-auto" />
         </div>
-        <div className="bg-card/30">
+        <div>
           <Image src={rightSrc} alt={rightAlt} width={0} height={0} sizes="50vw" className="w-full h-auto" />
         </div>
       </div>
