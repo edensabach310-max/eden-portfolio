@@ -7,10 +7,17 @@ export const aboutSchema = defineType({
   fields: [
     defineField({
       name: "bio",
-      title: "Bio",
+      title: "Bio — First paragraph (dark)",
       type: "text",
-      rows: 6,
-      description: "Your main bio paragraph",
+      rows: 4,
+      description: "e.g. Product Designer, currently at Lightricks...",
+    }),
+    defineField({
+      name: "bio2",
+      title: "Bio — Second paragraph (gray)",
+      type: "text",
+      rows: 4,
+      description: "e.g. Based in Tel Aviv...",
     }),
     defineField({
       name: "photo",

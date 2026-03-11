@@ -142,7 +142,7 @@ function SectionWithMediaBlock({
           />
         )
       ) : imageSrc ? (
-        <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto" />
+        <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto mix-blend-multiply" />
       ) : null}
     </div>
   )
@@ -201,7 +201,7 @@ function ImageBlock({
   return (
     <div className={wrapperClass}>
       <div>
-        <Image src={src} alt={alt} width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        <Image src={src} alt={alt} width={0} height={0} sizes="100vw" className="w-full h-auto mix-blend-multiply" />
       </div>
       {caption && (
         <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
@@ -227,10 +227,10 @@ function ImagePairBlock({
     <div className="my-8 md:my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
-          <Image src={leftSrc} alt={leftAlt} width={0} height={0} sizes="50vw" className="w-full h-auto" />
+          <Image src={leftSrc} alt={leftAlt} width={0} height={0} sizes="50vw" className="w-full h-auto mix-blend-multiply" />
         </div>
         <div>
-          <Image src={rightSrc} alt={rightAlt} width={0} height={0} sizes="50vw" className="w-full h-auto" />
+          <Image src={rightSrc} alt={rightAlt} width={0} height={0} sizes="50vw" className="w-full h-auto mix-blend-multiply" />
         </div>
       </div>
       {caption && (

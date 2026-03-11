@@ -21,6 +21,7 @@ type AboutData = {
   email?: string
   linkedIn?: string
   experience?: Experience[]
+  [key: string]: unknown
 }
 
 // ─── Polaroid Wall ────────────────────────────────────────────────────────────
@@ -118,17 +119,11 @@ export default function AboutClient({ about }: { about: AboutData }) {
       <div className="grid grid-cols-1 md:grid-cols-[1fr_520px] gap-12 md:gap-16 mb-16 md:mb-24">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}>
-          <p className="t-body text-base md:text-3xl text-ink max-w-2xl mb-6 md:mb-8">
-            Product Designer, currently at Lightricks.
-            <br /><br />
-            I design systems and experiences shaped by real behavior &mdash; making complex things feel obvious.
+          <p className="t-body text-base md:text-3xl text-ink max-w-2xl mb-6 md:mb-8" style={{ whiteSpace: "pre-wrap" }}>
+            {about.bio ?? "Product Designer, currently at Lightricks.\n\nI design systems and experiences shaped by real behavior — making complex things feel obvious."}
           </p>
-          <p className="t-body text-base md:text-3xl text-muted max-w-2xl">
-            Based in Tel Aviv. I look for inspiration in technology, culture, and city streets &mdash;
-            usually on walks with Kali 🐕‍🦺
-            <br /><br />
-            I studied at Bezalel Academy of Arts and Design,
-            which gave me a deep respect for how things look and feel &mdash; not just how they work.
+          <p className="t-body text-base md:text-3xl text-muted max-w-2xl" style={{ whiteSpace: "pre-wrap" }}>
+            {about.bio2 ?? "Based in Tel Aviv. I look for inspiration in technology, culture, and city streets — usually on walks with Kali 🐕‍🦺\n\nI studied at Bezalel Academy of Arts and Design, which gave me a deep respect for how things look and feel — not just how they work."}
           </p>
         </motion.div>
         <PolaroidWall />
