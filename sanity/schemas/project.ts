@@ -246,10 +246,10 @@ export const projectSchema = defineType({
             }),
             defineField({
               name: "file",
-              title: "Video File (mp4 / mov)",
+              title: "Video File",
               type: "file",
-              description: "Upload directly if you don't have a YouTube/Vimeo link",
-              options: { accept: "video/*" },
+              description: "⚠️ MP4 only — MOV/QuickTime files won't play in Chrome. Export from QuickTime → File → Export As → 1080p to convert.",
+              options: { accept: "video/mp4" },
             }),
             defineField({ name: "caption", title: "Caption", type: "string" }),
             defineField({
