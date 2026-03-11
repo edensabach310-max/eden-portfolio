@@ -51,6 +51,7 @@ function AutoplayVideo({ src, caption, size = "full" }: { src: string; caption?:
         <video
           ref={videoRef}
           src={src}
+          autoPlay
           muted
           playsInline
           loop
@@ -134,6 +135,7 @@ function SectionWithMediaBlock({
           <video
             ref={videoRef}
             src={videoSrc}
+            autoPlay
             muted
             playsInline
             loop
