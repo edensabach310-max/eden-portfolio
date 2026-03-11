@@ -67,7 +67,8 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
               transition={{ duration: 0.6, delay: 0.55 }}
             >
               Product designer at Lightricks — making AI apps feel effortless
-              for millions of people.
+              for millions of people.{" "}
+              <span style={{ color: "#0057FF" }}>* oh, and I built this whole site myself using vibe coding.</span>
             </motion.p>
 
             <motion.div
@@ -97,19 +98,6 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
           </span>
         </div>
       </section>
-
-      {/* ── Built with Claude Code ─────────────────────────── */}
-      <motion.div
-        className="px-6 md:px-12 py-5 border-t border-card"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <p className="t-body text-sm md:text-3xl" style={{ color: "#0057FF" }}>
-          Welcome to my portfolio — which, by the way, I designed and built entirely by myself using Claude Code (vibe coding).
-        </p>
-      </motion.div>
 
       {/* ── Work Section ───────────────────────────────────── */}
       <section id="work" className="px-6 md:px-12 pt-12 pb-8">
