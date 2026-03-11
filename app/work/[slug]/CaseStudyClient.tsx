@@ -12,7 +12,7 @@ function getYouTubeId(url: string): string | null {
   return match ? match[1] : null
 }
 
-function AutoplayVideo({ src, caption, size = "full" }: { src: string; caption?: string; size?: "full" | "medium" | "small" }) {
+function AutoplayVideo({ src, caption, size = "full", rounded = false }: { src: string; caption?: string; size?: "full" | "medium" | "small"; rounded?: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const youtubeId = src ? getYouTubeId(src) : null
 
@@ -56,7 +56,7 @@ function AutoplayVideo({ src, caption, size = "full" }: { src: string; caption?:
           playsInline
           loop
           className="w-full bg-card/30"
-          style={{ aspectRatio: "auto" }}
+          style={{ aspectRatio: "auto", borderRadius: rounded ? "1rem" : undefined }}
         />
       )}
       {caption && <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>}
@@ -414,7 +414,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
             return <MetricBlock key={block._key} metrics={block.metrics} />
           if (block._type === "videoBlock") {
             const src = block.url || block.fileUrl || ""
-            return <AutoplayVideo key={block._key} src={src} caption={block.caption} size={block.size} />
+            return <AutoplayVideo key={block._key} src={src} caption={block.caption} size={block.size} rounded={block.rounded} />
           }
           return null
         })}

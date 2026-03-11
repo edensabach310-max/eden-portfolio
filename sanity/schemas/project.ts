@@ -253,6 +253,12 @@ export const projectSchema = defineType({
             }),
             defineField({ name: "caption", title: "Caption", type: "string" }),
             defineField({
+              name: "rounded",
+              title: "Rounded corners",
+              type: "boolean",
+              initialValue: false,
+            }),
+            defineField({
               name: "size",
               title: "Size",
               type: "string",
