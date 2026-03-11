@@ -175,7 +175,9 @@ export default function AboutClient({ about }: { about: AboutData }) {
                 <div className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: item.accent }} />
                 <div>
                   <div className="t-body text-xl md:text-3xl text-ink">{item.role}</div>
-                  <div className="t-body text-base md:text-3xl text-muted">{item.place} · {item.products}</div>
+                  <div className="t-body text-base md:text-3xl text-muted">
+                    {item.place}<br />{item.products}
+                  </div>
                 </div>
               </div>
               <div className="t-body text-base md:text-3xl text-muted ml-6 md:ml-0">{item.period}</div>
