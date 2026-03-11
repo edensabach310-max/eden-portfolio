@@ -76,6 +76,25 @@ export const aboutSchema = defineType({
       ],
     }),
     defineField({
+      name: "recognition",
+      title: "Recognition & Exhibitions",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string" }),
+            defineField({ name: "place", title: "Place / Organization", type: "string" }),
+            defineField({ name: "period", title: "Period / Year", type: "string" }),
+          ],
+          preview: {
+            select: { title: "title", subtitle: "period" },
+            prepare({ title, subtitle }) { return { title, subtitle } },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "cv",
       title: "CV / Resume (PDF)",
       type: "file",

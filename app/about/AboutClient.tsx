@@ -184,6 +184,26 @@ export default function AboutClient({ about }: { about: AboutData }) {
         </div>
       </motion.div>
 
+      {/* Recognition */}
+      {(about.recognition as { title: string; place: string; period: string }[] | undefined)?.length ? (
+        <motion.div className="border-t border-card pt-10 md:pt-12 mb-16 md:mb-24"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0 }} transition={{ duration: 0.7 }}>
+          <h2 className="t-body text-base md:text-3xl text-muted mb-6 md:mb-8">Recognition & Exhibitions</h2>
+          <div className="space-y-6 md:space-y-8">
+            {(about.recognition as { title: string; place: string; period: string }[]).map((item, i) => (
+              <div key={i} className="flex flex-col md:flex-row md:items-center justify-between gap-1 md:gap-4 border-b border-card pb-6 md:pb-8 last:border-0">
+                <div>
+                  <div className="t-body text-xl md:text-3xl text-ink">{item.title}</div>
+                  <div className="t-body text-base md:text-3xl text-muted">{item.place}</div>
+                </div>
+                <div className="t-body text-base md:text-3xl text-muted">{item.period}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      ) : null}
+
       {/* Contact CTA */}
       <motion.div className="border-t border-card pt-10 md:pt-12"
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}

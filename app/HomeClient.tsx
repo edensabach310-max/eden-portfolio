@@ -98,6 +98,19 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
         </div>
       </section>
 
+      {/* ── Built with Claude Code ─────────────────────────── */}
+      <motion.div
+        className="px-6 md:px-12 py-5 border-t border-card"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <p className="t-body text-sm md:text-3xl" style={{ color: "#0057FF" }}>
+          * btw — I designed and built this site myself using Claude Code (vibe coding).
+        </p>
+      </motion.div>
+
       {/* ── Work Section ───────────────────────────────────── */}
       <section id="work" className="px-6 md:px-12 pt-12 pb-8">
         <div className="flex items-baseline justify-between border-b-2 border-ink pb-4 mb-0">
