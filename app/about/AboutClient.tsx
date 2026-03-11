@@ -91,7 +91,7 @@ export default function AboutClient({ about }: { about: AboutData }) {
           transition={{ duration: 0.5, delay: 0.1 }}>
           About
         </motion.p>
-        <AnimatedText text="Making complex things feel obvious."
+        <AnimatedText text={about.headline as string ?? "Making complex things feel obvious."}
           className="font-sans font-light text-ink max-w-3xl"
           style={{ fontSize: "clamp(2rem, 6vw, 5.5rem)", letterSpacing: "-0.02em", lineHeight: 1.05 }}
           tag="h1" />
