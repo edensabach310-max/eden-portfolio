@@ -32,10 +32,10 @@ export type ContentBlock =
   | { _type: "textBlock"; _key: string; text: string }
   | { _type: "imageBlock"; _key: string; image: SanityImage; caption?: string; fullWidth?: boolean; alignment?: "full" | "left" | "right" }
   | { _type: "imagePair"; _key: string; left: SanityImage; right: SanityImage; caption?: string }
-  | { _type: "videoBlock"; _key: string; url?: string; fileUrl?: string; caption?: string; size?: "full" | "medium" | "small" }
+  | { _type: "videoBlock"; _key: string; url?: string; fileUrl?: string; caption?: string; size?: "full" | "medium" | "small"; rounded?: boolean; phoneFrame?: boolean }
   | { _type: "figmaEmbed"; _key: string; embedUrl: string; caption?: string }
   | { _type: "metricBlock"; _key: string; metrics: { label: string; value: string }[] }
-  | { _type: "sectionWithMedia"; _key: string; label?: string; text: string; image?: SanityImage; videoUrl?: string; videoFileUrl?: string; caption?: string }
+  | { _type: "sectionWithMedia"; _key: string; label?: string; text: string; image?: SanityImage; videoUrl?: string; videoFileUrl?: string; caption?: string; rounded?: boolean; phoneFrame?: boolean }
 
 export interface AboutData {
   bio: string

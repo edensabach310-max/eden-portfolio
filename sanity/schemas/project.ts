@@ -156,6 +156,8 @@ export const projectSchema = defineType({
               options: { accept: "video/*" },
             }),
             defineField({ name: "caption", title: "Caption", type: "string" }),
+            defineField({ name: "rounded", title: "Rounded corners", type: "boolean", initialValue: false }),
+            defineField({ name: "phoneFrame", title: "iPhone frame", type: "boolean", initialValue: false }),
           ],
           preview: {
             select: { title: "label", subtitle: "text", media: "image" },
@@ -252,12 +254,8 @@ export const projectSchema = defineType({
               options: { accept: "video/mp4" },
             }),
             defineField({ name: "caption", title: "Caption", type: "string" }),
-            defineField({
-              name: "rounded",
-              title: "Rounded corners",
-              type: "boolean",
-              initialValue: false,
-            }),
+            defineField({ name: "rounded", title: "Rounded corners", type: "boolean", initialValue: false }),
+            defineField({ name: "phoneFrame", title: "iPhone frame", type: "boolean", initialValue: false }),
             defineField({
               name: "size",
               title: "Size",

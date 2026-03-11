@@ -7,12 +7,33 @@ import Link from "next/link"
 import AnimatedText from "@/components/ui/AnimatedText"
 import type { Project } from "@/types"
 
+function PhoneFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{
+      position: "relative",
+      background: "#111",
+      borderRadius: "13%",
+      padding: "4% 3%",
+      boxShadow: "inset 0 0 0 1.5px rgba(255,255,255,0.12), 0 24px 64px rgba(0,0,0,0.25)",
+    }}>
+      {/* Dynamic island */}
+      <div style={{
+        position: "absolute", top: "2%", left: "50%", transform: "translateX(-50%)",
+        width: "22%", height: "3%", background: "#000", borderRadius: "100px", zIndex: 10,
+      }} />
+      <div style={{ borderRadius: "10%", overflow: "hidden" }}>
+        {children}
+      </div>
+    </div>
+  )
+}
+
 function getYouTubeId(url: string): string | null {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/)
   return match ? match[1] : null
 }
 
-function AutoplayVideo({ src, caption, size = "full", rounded = false }: { src: string; caption?: string; size?: "full" | "medium" | "small"; rounded?: boolean }) {
+function AutoplayVideo({ src, caption, size = "full", rounded = false, phoneFrame = false }: { src: string; caption?: string; size?: "full" | "medium" | "small"; rounded?: boolean; phoneFrame?: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const youtubeId = src ? getYouTubeId(src) : null
 
@@ -37,6 +58,19 @@ function AutoplayVideo({ src, caption, size = "full", rounded = false }: { src: 
       ? "my-8 md:my-12 w-full md:max-w-[66%]"
       : "my-8 md:my-12 w-full"
 
+  const videoEl = (
+    <video
+      ref={videoRef}
+      src={src}
+      autoPlay
+      muted
+      playsInline
+      loop
+      className="w-full"
+      style={{ aspectRatio: "auto", display: "block", borderRadius: (!phoneFrame && rounded) ? "1rem" : undefined }}
+    />
+  )
+
   return (
     <div className={wrapperClass}>
       {youtubeId ? (
@@ -47,18 +81,9 @@ function AutoplayVideo({ src, caption, size = "full", rounded = false }: { src: 
           style={{ border: "none" }}
           title="video"
         />
-      ) : (
-        <video
-          ref={videoRef}
-          src={src}
-          autoPlay
-          muted
-          playsInline
-          loop
-          className="w-full bg-card/30"
-          style={{ aspectRatio: "auto", borderRadius: rounded ? "1rem" : undefined }}
-        />
-      )}
+      ) : phoneFrame ? (
+        <PhoneFrame>{videoEl}</PhoneFrame>
+      ) : videoEl}
       {caption && <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>}
     </div>
   )
@@ -95,6 +120,8 @@ function SectionWithMediaBlock({
   imageAlt,
   videoSrc,
   caption,
+  rounded = false,
+  phoneFrame = false,
 }: {
   label?: string
   text: string
@@ -102,6 +129,8 @@ function SectionWithMediaBlock({
   imageAlt?: string
   videoSrc?: string
   caption?: string
+  rounded?: boolean
+  phoneFrame?: boolean
 }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const youtubeId = videoSrc ? getYouTubeId(videoSrc) : null
@@ -120,6 +149,19 @@ function SectionWithMediaBlock({
     return () => observer.disconnect()
   }, [youtubeId])
 
+  const videoEl = videoSrc && !youtubeId ? (
+    <video
+      ref={videoRef}
+      src={videoSrc}
+      autoPlay
+      muted
+      playsInline
+      loop
+      className="w-full"
+      style={{ aspectRatio: "auto", display: "block", borderRadius: (!phoneFrame && rounded) ? "1rem" : undefined }}
+    />
+  ) : null
+
   const media = (
     <div>
       {videoSrc ? (
@@ -131,18 +173,9 @@ function SectionWithMediaBlock({
             style={{ border: "none" }}
             title="video"
           />
-        ) : (
-          <video
-            ref={videoRef}
-            src={videoSrc}
-            autoPlay
-            muted
-            playsInline
-            loop
-            className="w-full"
-            style={{ aspectRatio: "auto" }}
-          />
-        )
+        ) : phoneFrame ? (
+          <PhoneFrame>{videoEl}</PhoneFrame>
+        ) : videoEl
       ) : imageSrc ? (
         <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto mix-blend-multiply" />
       ) : null}
@@ -395,7 +428,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
           if (block._type === "sectionWithMedia") {
             const imageSrc = (block.image as unknown as { url: string })?.url || ""
             const videoSrc = block.videoUrl || block.videoFileUrl || ""
-            return <SectionWithMediaBlock key={block._key} label={block.label} text={block.text} imageSrc={imageSrc} imageAlt={block.image?.alt || ""} videoSrc={videoSrc || undefined} caption={block.caption} />
+            return <SectionWithMediaBlock key={block._key} label={block.label} text={block.text} imageSrc={imageSrc} imageAlt={block.image?.alt || ""} videoSrc={videoSrc || undefined} caption={block.caption} rounded={block.rounded} phoneFrame={block.phoneFrame} />
           }
           if (block._type === "imageBlock") {
             const src = (block.image as unknown as { url: string }).url || ""
@@ -414,7 +447,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
             return <MetricBlock key={block._key} metrics={block.metrics} />
           if (block._type === "videoBlock") {
             const src = block.url || block.fileUrl || ""
-            return <AutoplayVideo key={block._key} src={src} caption={block.caption} size={block.size} rounded={block.rounded} />
+            return <AutoplayVideo key={block._key} src={src} caption={block.caption} size={block.size} rounded={block.rounded} phoneFrame={block.phoneFrame} />
           }
           return null
         })}
