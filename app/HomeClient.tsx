@@ -107,7 +107,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
         transition={{ duration: 0.6 }}
       >
         <p className="t-body text-sm md:text-3xl" style={{ color: "#0057FF" }}>
-          * btw — I designed and built this site myself using Claude Code (vibe coding).
+          Welcome to my portfolio — which, by the way, I designed and built entirely by myself using Claude Code (vibe coding).
         </p>
       </motion.div>
 
