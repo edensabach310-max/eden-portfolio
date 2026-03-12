@@ -66,21 +66,21 @@ export default function HomeClient({ productProjects, creativeProjects, homepage
             transition={{ duration: 0.75, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <div>
-              <ProximityText text={heroLine1} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />{" "}
+              <ProximityText text={heroLine1} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={80} />{" "}
               <InlineSticker src="/stickers/smiley.png" size="0.9em" rotate={10} />
             </div>
             <div>
               <InlineSticker src="/stickers/flowers.png" size="0.85em" rotate={-8} />{" "}
-              <ProximityText text={heroLine2} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />
+              <ProximityText text={heroLine2} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={80} />
             </div>
             <div>
-              <ProximityText text={heroLine3} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />{" "}
+              <ProximityText text={heroLine3} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={80} />{" "}
               <InlineSticker src="/stickers/macbook.png" size="0.9em" rotate={6} />
             </div>
             <div>
-              <ProximityText text={heroLine4P1} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />{" "}
+              <ProximityText text={heroLine4P1} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={80} />{" "}
               <InlineSticker src="/stickers/kali.png" size="1em" rotate={-10} />
-              {" "}<ProximityText text={heroLine4P2} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />
+              {" "}<ProximityText text={heroLine4P2} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={80} />
             </div>
           </motion.div>
 

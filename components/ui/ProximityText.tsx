@@ -48,7 +48,7 @@ export default function ProximityText({
     letterRefs.current.forEach((el, i) => {
       if (!el) return
       currentWeights.current[i] = minWeight
-      el.style.transition = "font-variation-settings 1.4s ease-out"
+      el.style.transition = "font-variation-settings 0.8s ease-out"
       el.style.fontVariationSettings = `'wght' ${minWeight}`
     })
   }, [minWeight])
@@ -110,14 +110,14 @@ export default function ProximityText({
           w = minWeight
         } else {
           const rawT = Math.exp(-(dx * dx) / sig2 - (dy * dy) / sy2)
-          const t = Math.min(1, rawT * 60)
+          const t = Math.min(1, rawT * 3)
           w = Math.round(minWeight + (maxWeight - minWeight) * t)
         }
 
         const prevW = currentWeights.current[i] ?? minWeight
         if (prevW !== w) {
           currentWeights.current[i] = w
-          el.style.transition = w > prevW ? "font-variation-settings 0s" : "font-variation-settings 1.4s ease-out"
+          el.style.transition = w > prevW ? "font-variation-settings 0s" : "font-variation-settings 0.8s ease-out"
           el.style.fontVariationSettings = `'wght' ${w}`
         }
       })
