@@ -8,25 +8,21 @@ import { sanityClient } from "@/lib/sanity"
 
 type ProjectStub = { slug: { current: string }; accentColor: string; order: number }
 
-const ROTATIONS = [-7, 5, -4, 8, -6, 4, -8, 6]
-
 function StickerItem({
   slug, accentColor, index, isActive,
 }: {
   slug: string; accentColor: string; index: number; isActive: boolean
 }) {
   const [hovered, setHovered] = useState(false)
-  const rotate = 0
   const filled = isActive || hovered
   const label = String(index + 1).padStart(2, "0")
 
   return (
-    <motion.div style={{ rotate }} transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}>
-      <Link
-        href={`/work/${slug}`}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+    <Link
+      href={`/work/${slug}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
         <motion.div
           animate={{
             background: filled ? accentColor : "transparent",
@@ -50,7 +46,6 @@ function StickerItem({
           {label}
         </motion.div>
       </Link>
-    </motion.div>
   )
 }
 
