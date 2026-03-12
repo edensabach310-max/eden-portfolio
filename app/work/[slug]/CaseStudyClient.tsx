@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion"
 import { useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -310,22 +310,69 @@ function FigmaEmbed({ url, caption }: { url: string; caption?: string }) {
   )
 }
 
+function AnimatedMetricValue({ value, delay = 0 }: { value: string; delay?: number }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.3 })
+
+  // Parse: optional sign, digits, suffix (e.g. "+63%" → sign="+", num="63", suffix="%")
+  const match = value.match(/^([+\-]?)([0-9]+(?:\.[0-9]+)?)(.*)$/)
+  const targetNum = match ? parseFloat(match[2]) : 0
+  const isFloat = match ? match[2].includes(".") : false
+
+  // Always call hooks unconditionally
+  const count = useMotionValue(0)
+  const display = useTransform(count, (v) => (isFloat ? v.toFixed(1) : Math.round(v).toString()))
+
+  useEffect(() => {
+    if (!isInView || !match) return
+    const ctrl = animate(count, targetNum, { duration: 1.8, delay, ease: [0.16, 1, 0.3, 1] })
+    return ctrl.stop
+  }, [isInView]) // eslint-disable-line
+
+  // Pure symbol with no number (e.g. "↑") — slide up
+  if (!match) {
+    return (
+      <motion.span
+        ref={ref}
+        initial={{ y: 20, opacity: 0 }}
+        animate={isInView ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {value}
+      </motion.span>
+    )
+  }
+
+  const [, sign, , suffix] = match
+  return (
+    <span ref={ref}>
+      {sign}<motion.span>{display}</motion.span>{suffix}
+    </span>
+  )
+}
+
 function MetricBlock({ metrics }: { metrics: { label: string; value: string }[] }) {
   return (
     <div className="py-4 my-8 md:my-10 md:max-w-[66%]">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
         {metrics.map((m, i) => (
-          <div key={i}>
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+          >
             <div
               className="font-sans font-light text-ink"
               style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", letterSpacing: "-0.04em", lineHeight: 1 }}
             >
-              {m.value}
+              <AnimatedMetricValue value={m.value} delay={i * 0.15} />
             </div>
             <div className="t-body text-xs uppercase tracking-widest text-muted mt-3" style={{ lineHeight: 1.3 }}>
               {m.label}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
