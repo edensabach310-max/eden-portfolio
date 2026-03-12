@@ -17,7 +17,8 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
   return (
     <Link
       href={`/work/${project.slug.current}`}
-      className="group relative flex items-center border-b-2 border-ink/40 py-2 md:py-3 overflow-x-hidden gap-4 md:gap-7"
+      className="group relative flex items-center border-b-2 border-ink/40 py-2 md:py-3 overflow-x-hidden gap-4 md:gap-7 active:opacity-70 transition-opacity duration-75"
+      onTouchStart={() => { if ("vibrate" in navigator) navigator.vibrate(8) }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       data-cursor

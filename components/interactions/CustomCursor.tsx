@@ -9,6 +9,11 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
   const [label, setLabel] = useState("")
+  const [isTouch, setIsTouch] = useState(true) // start hidden, reveal only on pointer:fine
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia("(pointer: coarse)").matches)
+  }, [])
 
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
@@ -53,6 +58,8 @@ export default function CustomCursor() {
       window.removeEventListener("mouseup", handleMouseUp)
     }
   }, [mouseX, mouseY])
+
+  if (isTouch) return null
 
   return (
     <>

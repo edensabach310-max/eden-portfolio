@@ -8,12 +8,36 @@ import { InlineSticker } from "@/components/ui/Stickers"
 import ProximityText from "@/components/ui/ProximityText"
 import type { Project } from "@/types"
 
+interface HomepageData {
+  subtitle?: string
+  heroLine1?: string
+  heroLine2?: string
+  heroLine3?: string
+  heroLine4Part1?: string
+  heroLine4Part2?: string
+  tagline?: string
+  accentNote?: string
+  email?: string
+}
+
 interface HomeClientProps {
   productProjects: Project[]
   creativeProjects: Project[]
+  homepageData?: HomepageData
 }
 
-export default function HomeClient({ productProjects, creativeProjects }: HomeClientProps) {
+export default function HomeClient({ productProjects, creativeProjects, homepageData }: HomeClientProps) {
+  const cms = homepageData ?? {}
+  const subtitle    = cms.subtitle     ?? "Product Designer · Tel Aviv"
+  const heroLine1   = cms.heroLine1    ?? "Hi, I'm Eden"
+  const heroLine2   = cms.heroLine2    ?? "live in Tel Aviv,"
+  const heroLine3   = cms.heroLine3    ?? "love designing"
+  const heroLine4P1 = cms.heroLine4Part1 ?? "& walking with"
+  const heroLine4P2 = cms.heroLine4Part2 ?? "Kali."
+  const tagline     = cms.tagline      ?? "Product designer at Lightricks — making AI apps feel effortless\nfor millions of people."
+  const accentNote  = cms.accentNote   ?? "* oh, and I built this whole site myself using vibe coding."
+  const email       = cms.email        ?? "mailto:eden@example.com"
+
   return (
     <div className="min-h-screen">
 
@@ -26,14 +50,14 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Product Designer · Tel Aviv
+            {subtitle}
           </motion.p>
 
           {/* Editorial hero */}
           <motion.div
             className="font-sans font-light text-ink"
             style={{
-              fontSize: "clamp(2rem, 8.5vw, 7.5rem)",
+              fontSize: "clamp(2.75rem, 8.5vw, 7.5rem)",
               letterSpacing: "-0.02em",
               lineHeight: 1.05,
             }}
@@ -42,21 +66,21 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
             transition={{ duration: 0.75, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <div>
-              <ProximityText text="Hi, I'm Eden" fontFamily="inherit" minWeight={300} maxWeight={900} sigma={100} />{" "}
+              <ProximityText text={heroLine1} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />{" "}
               <InlineSticker src="/stickers/smiley.png" size="0.9em" rotate={10} />
             </div>
             <div>
               <InlineSticker src="/stickers/flowers.png" size="0.85em" rotate={-8} />{" "}
-              <ProximityText text="live in Tel Aviv," fontFamily="inherit" minWeight={300} maxWeight={900} sigma={100} />
+              <ProximityText text={heroLine2} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />
             </div>
             <div>
-              <ProximityText text="love designing" fontFamily="inherit" minWeight={300} maxWeight={900} sigma={100} />{" "}
+              <ProximityText text={heroLine3} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />{" "}
               <InlineSticker src="/stickers/macbook.png" size="0.9em" rotate={6} />
             </div>
             <div>
-              <ProximityText text="& walking with" fontFamily="inherit" minWeight={300} maxWeight={900} sigma={100} />{" "}
+              <ProximityText text={heroLine4P1} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />{" "}
               <InlineSticker src="/stickers/kali.png" size="1em" rotate={-10} />
-              {" "}<ProximityText text="Kali." fontFamily="inherit" minWeight={300} maxWeight={900} sigma={100} />
+              {" "}<ProximityText text={heroLine4P2} fontFamily="inherit" minWeight={300} maxWeight={900} sigma={150} />
             </div>
           </motion.div>
 
@@ -67,9 +91,8 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.55 }}
             >
-              Product designer at Lightricks — making AI apps feel effortless
-              for millions of people.{" "}
-              <span style={{ color: "#0057FF" }}>* oh, and I built this whole site myself using vibe coding.</span>
+              {tagline}{" "}
+              <span style={{ color: "#0057FF" }}>{accentNote}</span>
             </motion.p>
 
             <motion.div
@@ -88,7 +111,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
         </motion.div>
 
         {/* Scroll indicator */}
-        <div className="absolute right-6 md:right-12 bottom-20 hidden md:flex flex-col items-center gap-2">
+        <div className="absolute left-6 md:left-12 bottom-20 hidden md:flex flex-col items-center gap-2">
           <motion.div
             className="w-px h-16 bg-muted/40 origin-top"
             animate={{ scaleY: [0, 1, 0] }}
@@ -137,7 +160,7 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
             style={{ fontSize: "clamp(1.75rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}
           />
           <Link
-            href="mailto:eden@example.com"
+            href={email.startsWith("mailto:") ? email : `mailto:${email}`}
             data-cursor
             data-cursor-label="Email"
             className="t-body text-base md:text-3xl border border-ink text-ink px-6 md:px-8 py-3 md:py-4 hover:bg-ink hover:text-bg transition-colors duration-300"

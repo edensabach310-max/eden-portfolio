@@ -48,7 +48,7 @@ export default function Navbar() {
           </span>
           {/* Mobile: simple name */}
           <span
-            className="md:hidden t-body"
+            className="md:hidden t-body whitespace-nowrap"
             style={{ fontSize: "1.125rem", letterSpacing: "-0.01em" }}
           >
             Eden Sabach
@@ -57,7 +57,9 @@ export default function Navbar() {
 
         {/* Nav links */}
         <nav className="flex items-center gap-4 md:gap-6 t-body text-sm md:text-3xl">
-          <NavStickers />
+          <span className="hidden md:contents">
+            <NavStickers />
+          </span>
           {links.map((link) => {
             const active =
               (link.href === "/#work" && pathname === "/") ||

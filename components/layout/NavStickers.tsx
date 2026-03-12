@@ -31,15 +31,15 @@ function StickerItem({
           }}
           transition={{ duration: 0.2 }}
           style={{
-            width: 46,
-            height: 46,
+            width: 34,
+            height: 34,
             borderRadius: "50%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             fontFamily: "var(--font-inter), sans-serif",
             fontWeight: 300,
-            fontSize: 22,
+            fontSize: 16,
             letterSpacing: "-0.02em",
             color: "#8C8C8C",
           }}

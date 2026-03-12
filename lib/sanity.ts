@@ -70,3 +70,11 @@ export async function getProjectBySlug(slug: string) {
 export async function getAboutData() {
   return sanityClient.fetch(`*[_type == "about"][0]`)
 }
+
+export async function getHomepageData() {
+  return sanityClient.fetch(`*[_type == "homepage"][0] {
+    subtitle, heroLine1, heroLine2, heroLine3,
+    heroLine4Part1, heroLine4Part2,
+    tagline, accentNote, email
+  }`)
+}
