@@ -35,16 +35,16 @@ function StickerItem({
             }}
             transition={{ duration: 0.2 }}
             style={{
-              width: 56,
-              height: 56,
+              width: 46,
+              height: 46,
               borderRadius: "50%",
               border: "1.5px solid #111",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontFamily: "inherit",
-              fontWeight: 400,
-              fontSize: 19,
+              fontWeight: 300,
+              fontSize: 22,
               color: "#111",
             }}
           >
