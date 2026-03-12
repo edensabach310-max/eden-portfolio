@@ -23,7 +23,7 @@ export default function ProximityText({
   sigmaY,
   fontFamily = "var(--font-inter), sans-serif",
 }: ProximityTextProps) {
-  const sy = sigmaY ?? sigma * 2
+  const sy = sigmaY ?? sigma * 0.6
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([])
 
   const resetWeights = useCallback(() => {
