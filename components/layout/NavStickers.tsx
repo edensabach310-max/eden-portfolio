@@ -54,8 +54,8 @@ export default function NavStickers() {
                     fontSize: 20,
                     color: "#111",
                     filter: isActive
-                      ? `drop-shadow(2px 4px 0px rgba(0,0,0,0.35))`
-                      : `drop-shadow(1px 3px 0px rgba(0,0,0,0.25))`,
+                      ? `drop-shadow(1px 2px 0px rgba(0,0,0,0.3))`
+                      : `drop-shadow(1px 1px 0px rgba(0,0,0,0.2))`,
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
