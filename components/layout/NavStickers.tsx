@@ -31,20 +31,20 @@ function StickerItem({
           <motion.div
             animate={{
               background: filled ? accentColor : "transparent",
-              borderColor: filled ? accentColor : "#111",
+              boxShadow: filled ? "inset 0 0 0 1.5px transparent" : "inset 0 0 0 1.5px #111",
             }}
             transition={{ duration: 0.2 }}
             style={{
               width: 46,
               height: 46,
               borderRadius: "50%",
-              border: "1.5px solid #111",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontFamily: "inherit",
+              fontFamily: "var(--font-inter), sans-serif",
               fontWeight: 300,
               fontSize: 22,
+              letterSpacing: "-0.02em",
               color: "#111",
             }}
           >
