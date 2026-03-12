@@ -29,7 +29,10 @@ function StickerItem({
       >
         <div style={{ position: "relative", display: "inline-flex", flexDirection: "column", alignItems: "center" }}>
           <motion.div
-            animate={{ background: filled ? accentColor : "transparent" }}
+            animate={{
+              background: filled ? accentColor : "transparent",
+              borderColor: filled ? accentColor : "#111",
+            }}
             transition={{ duration: 0.2 }}
             style={{
               width: 56,
@@ -39,7 +42,7 @@ function StickerItem({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontFamily: "var(--font-sans)",
+              fontFamily: "inherit",
               fontWeight: 400,
               fontSize: 19,
               color: "#111",
