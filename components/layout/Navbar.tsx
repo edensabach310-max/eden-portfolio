@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 
 import ProximityText from "@/components/ui/ProximityText"
+import NavStickers from "./NavStickers"
 
 const links = [
   { href: "/#work", label: "Work" },
@@ -55,7 +56,8 @@ export default function Navbar() {
         </Link>
 
         {/* Nav links */}
-        <nav className="flex items-center gap-5 md:gap-8 t-body text-sm md:text-3xl">
+        <nav className="flex items-center gap-4 md:gap-6 t-body text-sm md:text-3xl">
+          <NavStickers />
           {links.map((link) => {
             const active =
               (link.href === "/#work" && pathname === "/") ||
