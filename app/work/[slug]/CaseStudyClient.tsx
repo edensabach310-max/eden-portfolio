@@ -67,7 +67,7 @@ function AutoplayVideo({ src, caption, size = "full", rounded = false, phoneFram
       playsInline
       loop
       className="w-full"
-      style={{ aspectRatio: "auto", display: "block", borderRadius: (!phoneFrame && rounded) ? "1rem" : undefined }}
+      style={{ aspectRatio: "auto", display: "block" }}
     />
   )
 
@@ -83,6 +83,10 @@ function AutoplayVideo({ src, caption, size = "full", rounded = false, phoneFram
         />
       ) : phoneFrame ? (
         <PhoneFrame>{videoEl}</PhoneFrame>
+      ) : rounded ? (
+        <div style={{ borderRadius: "44px", overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.18)" }}>
+          {videoEl}
+        </div>
       ) : videoEl}
       {caption && <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>}
     </div>
@@ -158,7 +162,7 @@ function SectionWithMediaBlock({
       playsInline
       loop
       className="w-full"
-      style={{ aspectRatio: "auto", display: "block", borderRadius: (!phoneFrame && rounded) ? "1rem" : undefined }}
+      style={{ aspectRatio: "auto", display: "block" }}
     />
   ) : null
 
@@ -175,6 +179,10 @@ function SectionWithMediaBlock({
           />
         ) : phoneFrame ? (
           <PhoneFrame>{videoEl}</PhoneFrame>
+        ) : rounded ? (
+          <div style={{ borderRadius: "44px", overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.18)" }}>
+            {videoEl}
+          </div>
         ) : videoEl
       ) : imageSrc ? (
         <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto mix-blend-multiply" />
