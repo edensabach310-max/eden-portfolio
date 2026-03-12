@@ -11,17 +11,17 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
       position: "relative",
-      background: "#111",
-      borderRadius: "13%",
-      padding: "4% 3%",
-      boxShadow: "inset 0 0 0 1.5px rgba(255,255,255,0.12), 0 24px 64px rgba(0,0,0,0.25)",
+      background: "#1c1c1e",
+      borderRadius: "50px",
+      padding: "14px 12px 22px",
+      boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.15), 0 24px 60px rgba(0,0,0,0.35)",
     }}>
-      {/* Dynamic island */}
+      {/* Dynamic island — sits at the top of the screen area */}
       <div style={{
-        position: "absolute", top: "2%", left: "50%", transform: "translateX(-50%)",
-        width: "22%", height: "3%", background: "#000", borderRadius: "100px", zIndex: 10,
+        position: "absolute", top: "16px", left: "50%", transform: "translateX(-50%)",
+        width: "92px", height: "32px", background: "#000", borderRadius: "16px", zIndex: 10,
       }} />
-      <div style={{ borderRadius: "10%", overflow: "hidden" }}>
+      <div style={{ borderRadius: "38px", overflow: "hidden" }}>
         {children}
       </div>
     </div>
@@ -182,35 +182,43 @@ function SectionWithMediaBlock({
     </div>
   )
 
-  return (
-    <div className="relative border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
-      {/* Desktop: media absolute-right so it doesn't stretch the section height */}
-      <div className="hidden md:block absolute top-8 right-0 w-[280px]">
-        {media}
-        {caption && (
-          <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
-        )}
-      </div>
+  const hasMedia = !!(imageSrc || videoSrc)
 
-      {/* Text — constrained so it doesn't run under the absolute media */}
-      <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8 md:pr-[316px]">
-        <div>
-          {label && (
-            <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
-          )}
+  return (
+    <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
+      <div className={`flex flex-col ${hasMedia ? "md:flex-row" : ""} items-start gap-8 md:gap-12`}>
+        {/* Text column — same max-width as SectionBlock */}
+        <div className="min-w-0 md:max-w-[66%] flex-1 grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
+          <div>
+            {label && (
+              <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
+            )}
+          </div>
+          <div className="t-body text-base md:text-3xl text-ink">
+            <p>{text}</p>
+          </div>
         </div>
-        <div className="t-body text-base md:text-3xl text-ink">
-          <p>{text}</p>
-        </div>
+
+        {/* Media column — desktop */}
+        {hasMedia && (
+          <div className="hidden md:block w-[280px] shrink-0">
+            {media}
+            {caption && (
+              <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Mobile: media below text */}
-      <div className="md:hidden mt-6">
-        {media}
-        {caption && (
-          <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
-        )}
-      </div>
+      {hasMedia && (
+        <div className="md:hidden mt-6">
+          {media}
+          {caption && (
+            <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
+          )}
+        </div>
+      )}
     </div>
   )
 }
