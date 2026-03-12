@@ -48,8 +48,8 @@ export default function NavStickers() {
                   initial="default"
                   transition={{ duration: 0.2 }}
                   style={{
-                    width: 72,
-                    height: 72,
+                    width: 88,
+                    height: 88,
                     borderRadius: "50%",
                     border: `2px solid #111`,
                     display: "flex",
@@ -57,7 +57,7 @@ export default function NavStickers() {
                     justifyContent: "center",
                     fontFamily: "var(--font-sans)",
                     fontWeight: 700,
-                    fontSize: 20,
+                    fontSize: 24,
                     color: "#111",
                     outline: isActive ? `2px solid #111` : "none",
                     outlineOffset: "3px",
