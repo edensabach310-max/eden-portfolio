@@ -16,7 +16,7 @@ function StickerItem({
   slug: string; accentColor: string; index: number; isActive: boolean
 }) {
   const [hovered, setHovered] = useState(false)
-  const rotate = ROTATIONS[index % ROTATIONS.length]
+  const rotate = 0
   const filled = isActive || hovered
   const label = String(index + 1).padStart(2, "0")
 
