@@ -43,7 +43,7 @@ export default function ProximityText({
         const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2)
         const t = Math.exp(-(dist * dist) / (2 * sigma * sigma))
         const w = Math.round(minWeight + (maxWeight - minWeight) * t)
-        el.style.transition = "font-variation-settings 0.04s linear"
+        el.style.transition = "font-variation-settings 0.08s ease-out"
         el.style.fontVariationSettings = `'wght' ${w}`
       })
     }
