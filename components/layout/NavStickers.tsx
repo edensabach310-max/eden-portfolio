@@ -35,30 +35,47 @@ export default function NavStickers() {
           <motion.div
             key={p.slug.current}
             style={{ rotate }}
-            whileHover={{ scale: 1.15, rotate: 0 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            whileHover="hovered"
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
             <Link href={`/work/${p.slug.current}`} title={`Project ${String(i + 1).padStart(2, "0")}`}>
-              <div
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: "50%",
-                  background: p.accentColor || "#0057FF",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 800,
-                  fontSize: 20,
-                  color: "#111",
-                  // sticker-style shadow: offset + slight blur, like peeling off the screen
-                  filter: isActive
-                    ? `drop-shadow(2px 4px 0px rgba(0,0,0,0.35))`
-                    : `drop-shadow(1px 3px 0px rgba(0,0,0,0.25))`,
-                }}
-              >
-                {String(i + 1).padStart(2, "0")}
+              <div style={{ position: "relative", display: "inline-flex", flexDirection: "column", alignItems: "center" }}>
+                <div
+                  style={{
+                    width: 72,
+                    height: 72,
+                    borderRadius: "50%",
+                    background: p.accentColor || "#0057FF",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 800,
+                    fontSize: 20,
+                    color: "#111",
+                    filter: isActive
+                      ? `drop-shadow(2px 4px 0px rgba(0,0,0,0.35))`
+                      : `drop-shadow(1px 3px 0px rgba(0,0,0,0.25))`,
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                {/* Arrow that slides up on hover */}
+                <motion.span
+                  variants={{ hovered: { opacity: 1, y: 0 }, default: { opacity: 0, y: 4 } }}
+                  initial="default"
+                  style={{
+                    position: "absolute",
+                    bottom: -18,
+                    fontSize: 13,
+                    color: "#111",
+                    fontFamily: "var(--font-sans)",
+                    pointerEvents: "none",
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
+                  ↑
+                </motion.span>
               </div>
             </Link>
           </motion.div>
