@@ -27,7 +27,7 @@ export default function NavStickers() {
   const currentSlug = pathname?.startsWith("/work/") ? pathname.replace("/work/", "") : null
 
   return (
-    <div className="flex items-center gap-1.5 md:gap-2">
+    <div className="flex items-center gap-2 md:gap-3">
       {projects.map((p, i) => {
         const isActive = p.slug.current === currentSlug
         const rotate = ROTATIONS[i % ROTATIONS.length]
@@ -35,28 +35,28 @@ export default function NavStickers() {
           <motion.div
             key={p.slug.current}
             style={{ rotate }}
-            whileHover={{ scale: 1.2, rotate: 0 }}
+            whileHover={{ scale: 1.15, rotate: 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <Link href={`/work/${p.slug.current}`} title={`Project ${String(i + 1).padStart(2, "0")}`}>
               <div
                 style={{
-                  width: 36,
-                  height: 36,
+                  width: 48,
+                  height: 48,
                   borderRadius: "50%",
                   background: p.accentColor || "#0057FF",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   fontFamily: "var(--font-sans)",
-                  fontWeight: 700,
-                  fontSize: 13,
+                  fontWeight: 800,
+                  fontSize: 15,
                   color: "#111",
-                  opacity: isActive ? 1 : 0.55,
                   boxShadow: isActive
-                    ? `0 3px 10px ${p.accentColor}80`
-                    : "0 1px 3px rgba(0,0,0,0.12)",
-                  transition: "opacity 0.2s",
+                    ? `0 4px 14px ${p.accentColor}90`
+                    : "0 2px 6px rgba(0,0,0,0.15)",
+                  outline: isActive ? `2.5px solid #111` : "none",
+                  outlineOffset: "2px",
                 }}
               >
                 {String(i + 1).padStart(2, "0")}
