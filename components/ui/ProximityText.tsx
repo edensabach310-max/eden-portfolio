@@ -9,6 +9,7 @@ interface ProximityTextProps {
   minWeight?: number
   maxWeight?: number
   sigma?: number        // px — radius of the gravity field
+  fontFamily?: string
 }
 
 export default function ProximityText({
@@ -18,6 +19,7 @@ export default function ProximityText({
   minWeight = 300,
   maxWeight = 800,
   sigma = 60,
+  fontFamily = "var(--font-inter), sans-serif",
 }: ProximityTextProps) {
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([])
 
@@ -62,7 +64,7 @@ export default function ProximityText({
           ref={(el) => { letterRefs.current[i] = el }}
           style={{
             display: "inline-block",
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily,
             fontVariationSettings: `'wght' ${minWeight}`,
           }}
         >

@@ -5,6 +5,7 @@ import Link from "next/link"
 import ProjectRow from "@/components/ui/ProjectRow"
 import AnimatedText from "@/components/ui/AnimatedText"
 import { InlineSticker } from "@/components/ui/Stickers"
+import ProximityText from "@/components/ui/ProximityText"
 import type { Project } from "@/types"
 
 interface HomeClientProps {
@@ -41,21 +42,21 @@ export default function HomeClient({ productProjects, creativeProjects }: HomeCl
             transition={{ duration: 0.75, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <div>
-              Hi, I&apos;m Eden{" "}
+              <ProximityText text="Hi, I'm Eden" fontFamily="inherit" minWeight={300} maxWeight={700} sigma={180} />{" "}
               <InlineSticker src="/stickers/smiley.png" size="0.9em" rotate={10} />
             </div>
             <div>
               <InlineSticker src="/stickers/flowers.png" size="0.85em" rotate={-8} />{" "}
-              live in Tel Aviv,
+              <ProximityText text="live in Tel Aviv," fontFamily="inherit" minWeight={300} maxWeight={700} sigma={180} />
             </div>
             <div>
-              love designing{" "}
+              <ProximityText text="love designing" fontFamily="inherit" minWeight={300} maxWeight={700} sigma={180} />{" "}
               <InlineSticker src="/stickers/macbook.png" size="0.9em" rotate={6} />
             </div>
             <div>
-              &amp; walking with{" "}
+              <ProximityText text="& walking with" fontFamily="inherit" minWeight={300} maxWeight={700} sigma={180} />{" "}
               <InlineSticker src="/stickers/kali.png" size="1em" rotate={-10} />
-              {" "}Kali.
+              {" "}<ProximityText text="Kali." fontFamily="inherit" minWeight={300} maxWeight={700} sigma={180} />
             </div>
           </motion.div>
 
