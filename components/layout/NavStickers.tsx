@@ -26,7 +26,8 @@ function StickerItem({
         <motion.div
           animate={{
             background: filled ? accentColor : "transparent",
-            boxShadow: filled ? "inset 0 0 0 1.5px transparent" : "inset 0 0 0 1.5px #111",
+            boxShadow: filled ? "inset 0 0 0 1.5px transparent" : "inset 0 0 0 1.5px #8C8C8C",
+            color: filled ? "#111" : "#8C8C8C",
           }}
           transition={{ duration: 0.2 }}
           style={{
@@ -40,7 +41,7 @@ function StickerItem({
             fontWeight: 300,
             fontSize: 22,
             letterSpacing: "-0.02em",
-            color: "#111",
+            color: "#8C8C8C",
           }}
         >
           {label}
