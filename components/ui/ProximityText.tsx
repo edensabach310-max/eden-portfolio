@@ -106,7 +106,7 @@ export default function ProximityText({
         const dy = pathY - cy
 
         let w: number
-        if (Math.abs(dy) > h * 1.4) {
+        if (Math.abs(dy) > h * 0.6) {
           w = minWeight
         } else {
           const rawT = Math.exp(-(dx * dx) / sig2 - (dy * dy) / sy2)
