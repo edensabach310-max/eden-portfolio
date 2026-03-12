@@ -41,8 +41,8 @@ export default function NavStickers() {
             <Link href={`/work/${p.slug.current}`} title={`Project ${String(i + 1).padStart(2, "0")}`}>
               <div
                 style={{
-                  width: 48,
-                  height: 48,
+                  width: 56,
+                  height: 56,
                   borderRadius: "50%",
                   background: p.accentColor || "#0057FF",
                   display: "flex",
@@ -50,13 +50,12 @@ export default function NavStickers() {
                   justifyContent: "center",
                   fontFamily: "var(--font-sans)",
                   fontWeight: 800,
-                  fontSize: 15,
+                  fontSize: 16,
                   color: "#111",
-                  boxShadow: isActive
-                    ? `0 4px 14px ${p.accentColor}90`
-                    : "0 2px 6px rgba(0,0,0,0.15)",
-                  outline: isActive ? `2.5px solid #111` : "none",
-                  outlineOffset: "2px",
+                  // sticker-style shadow: offset + slight blur, like peeling off the screen
+                  filter: isActive
+                    ? `drop-shadow(2px 4px 0px rgba(0,0,0,0.35))`
+                    : `drop-shadow(1px 3px 0px rgba(0,0,0,0.25))`,
                 }}
               >
                 {String(i + 1).padStart(2, "0")}
