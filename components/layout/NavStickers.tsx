@@ -41,7 +41,7 @@ function StickerItem({
               justifyContent: "center",
               fontFamily: "var(--font-sans)",
               fontWeight: 500,
-              fontSize: 15,
+              fontSize: 19,
               color: "#111",
             }}
           >
