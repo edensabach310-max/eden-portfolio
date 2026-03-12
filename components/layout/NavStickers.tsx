@@ -28,28 +28,19 @@ function StickerItem({
         onMouseLeave={() => setHovered(false)}
       >
         <div style={{ position: "relative", display: "inline-flex", flexDirection: "column", alignItems: "center" }}>
-          <motion.div
-            animate={{
-              background: filled ? accentColor : "transparent",
-              boxShadow: filled ? "inset 0 0 0 1.5px transparent" : "inset 0 0 0 1.5px #111",
-            }}
+          <motion.span
+            animate={{ color: filled ? accentColor : "#111" }}
             transition={{ duration: 0.2 }}
             style={{
-              width: 46,
-              height: 46,
-              borderRadius: "50%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               fontFamily: "var(--font-inter), sans-serif",
               fontWeight: 300,
               fontSize: 22,
               letterSpacing: "-0.02em",
-              color: "#111",
+              lineHeight: 1,
             }}
           >
             {label}
-          </motion.div>
+          </motion.span>
           <motion.span
             animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 4 }}
             transition={{ duration: 0.2 }}
