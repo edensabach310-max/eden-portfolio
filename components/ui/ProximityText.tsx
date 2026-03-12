@@ -8,7 +8,8 @@ interface ProximityTextProps {
   style?: React.CSSProperties
   minWeight?: number
   maxWeight?: number
-  sigma?: number        // px — radius of the gravity field
+  sigma?: number        // px — horizontal radius
+  sigmaY?: number       // px — vertical radius (defaults to 2× sigma for equal feel)
   fontFamily?: string
 }
 
@@ -19,8 +20,10 @@ export default function ProximityText({
   minWeight = 300,
   maxWeight = 800,
   sigma = 60,
+  sigmaY,
   fontFamily = "var(--font-inter), sans-serif",
 }: ProximityTextProps) {
+  const sy = sigmaY ?? sigma * 2
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([])
 
   const resetWeights = useCallback(() => {
@@ -40,8 +43,9 @@ export default function ProximityText({
         const rect = el.getBoundingClientRect()
         const cx = rect.left + rect.width / 2
         const cy = rect.top + rect.height / 2
-        const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2)
-        const t = Math.exp(-(dist * dist) / (2 * sigma * sigma))
+        const dx = mx - cx
+        const dy = my - cy
+        const t = Math.exp(-(dx * dx) / (2 * sigma * sigma) - (dy * dy) / (2 * sy * sy))
         const w = Math.round(minWeight + (maxWeight - minWeight) * t)
         const approaching = w > parseFloat(el.style.fontVariationSettings?.match(/[\d.]+/)?.[0] ?? "300")
         el.style.transition = approaching
@@ -57,7 +61,7 @@ export default function ProximityText({
       window.removeEventListener("mousemove", onMove)
       document.removeEventListener("mouseleave", resetWeights)
     }
-  }, [minWeight, maxWeight, sigma, resetWeights])
+  }, [minWeight, maxWeight, sigma, sy, resetWeights])
 
   return (
     <span className={className} style={style}>
