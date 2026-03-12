@@ -25,21 +25,15 @@ export default function ProximityText({
 }: ProximityTextProps) {
   const sy = sigmaY ?? sigma
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const cachedRects = useRef<{ cx: number; cy: number; h: number; hw: number; hh: number }[]>([])
+  const cachedRects = useRef<{ cx: number; cy: number; h: number }[]>([])
   const currentWeights = useRef<number[]>([])
   const prevMouse = useRef<{ x: number; y: number } | null>(null)
 
   const updateRects = useCallback(() => {
     cachedRects.current = letterRefs.current.map((el) => {
-      if (!el) return { cx: 0, cy: 0, h: 0, hw: 0, hh: 0 }
+      if (!el) return { cx: 0, cy: 0, h: 0 }
       const r = el.getBoundingClientRect()
-      return {
-        cx: r.left + r.width / 2,
-        cy: r.top + r.height / 2,
-        h: r.height,
-        hw: r.width / 2,   // half-width
-        hh: r.height / 2,  // half-height
-      }
+      return { cx: r.left + r.width / 2, cy: r.top + r.height / 2, h: r.height }
     })
   }, [])
 
@@ -54,7 +48,6 @@ export default function ProximityText({
   }, [minWeight])
 
   useEffect(() => {
-    // Delay initial cache until after mount animations settle
     const t1 = setTimeout(updateRects, 100)
     const t2 = setTimeout(updateRects, 800)
     window.addEventListener("resize", updateRects)
@@ -79,9 +72,9 @@ export default function ProximityText({
 
       letterRefs.current.forEach((el, i) => {
         if (!el) return
-        const { cx, cy, h, hw } = cachedRects.current[i] ?? { cx: 0, cy: 0, h: 0, hw: 0, hh: 0 }
+        const { cx, cy, h } = cachedRects.current[i] ?? { cx: 0, cy: 0, h: 0 }
 
-        // Find closest point on movement path [prev → current]
+        // Find closest point on movement path [prev → current] to letter center
         let pathX = mx
         let pathY = my
 
@@ -93,7 +86,6 @@ export default function ProximityText({
             const tParam = Math.max(0, Math.min(1, ((cx - prev.x) * lx + (cy - prev.y) * ly) / len2))
             const closestX = prev.x + tParam * lx
             const closestY = prev.y + tParam * ly
-            // Use closest path point if nearer to letter center
             if ((closestX - cx) ** 2 + (closestY - cy) ** 2 < (pathX - cx) ** 2 + (pathY - cy) ** 2) {
               pathX = closestX
               pathY = closestY
@@ -101,8 +93,8 @@ export default function ProximityText({
           }
         }
 
-        // dx: 0 if cursor within letter's horizontal bounds (whole letter = "center zone")
-        const dx = Math.max(0, Math.abs(pathX - cx) - hw)
+        // Center-based distance — natural spotlight falloff per letter
+        const dx = pathX - cx
         const dy = pathY - cy
 
         let w: number
@@ -110,7 +102,7 @@ export default function ProximityText({
           w = minWeight
         } else {
           const rawT = Math.exp(-(dx * dx) / sig2 - (dy * dy) / sy2)
-          const t = Math.min(1, rawT * 3)
+          const t = Math.min(1, rawT * 1.2)
           w = Math.round(minWeight + (maxWeight - minWeight) * t)
         }
 
