@@ -40,26 +40,31 @@ export default function NavStickers() {
           >
             <Link href={`/work/${p.slug.current}`} title={`Project ${String(i + 1).padStart(2, "0")}`}>
               <div style={{ position: "relative", display: "inline-flex", flexDirection: "column", alignItems: "center" }}>
-                <div
+                <motion.div
+                  variants={{
+                    hovered: { background: p.accentColor || "#0057FF" },
+                    default: { background: "transparent" },
+                  }}
+                  initial="default"
+                  transition={{ duration: 0.2 }}
                   style={{
                     width: 72,
                     height: 72,
                     borderRadius: "50%",
-                    background: p.accentColor || "#0057FF",
+                    border: `2px solid #111`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontFamily: "var(--font-sans)",
-                    fontWeight: 800,
+                    fontWeight: 700,
                     fontSize: 20,
                     color: "#111",
-                    filter: isActive
-                      ? `drop-shadow(1px 2px 0px rgba(0,0,0,0.3))`
-                      : `drop-shadow(1px 1px 0px rgba(0,0,0,0.2))`,
+                    outline: isActive ? `2px solid #111` : "none",
+                    outlineOffset: "3px",
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
-                </div>
+                </motion.div>
                 {/* Arrow that slides up on hover */}
                 <motion.span
                   variants={{ hovered: { opacity: 1, y: 0 }, default: { opacity: 0, y: 4 } }}
