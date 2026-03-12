@@ -32,16 +32,16 @@ function StickerItem({
             animate={{ background: filled ? accentColor : "transparent" }}
             transition={{ duration: 0.2 }}
             style={{
-              width: 88,
-              height: 88,
+              width: 56,
+              height: 56,
               borderRadius: "50%",
-              border: "2px solid #111",
+              border: "1.5px solid #111",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontFamily: "var(--font-sans)",
-              fontWeight: 700,
-              fontSize: 24,
+              fontWeight: 500,
+              fontSize: 15,
               color: "#111",
             }}
           >
