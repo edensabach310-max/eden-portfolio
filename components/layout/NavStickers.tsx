@@ -41,20 +41,6 @@ function StickerItem({
           >
             {label}
           </motion.span>
-          <motion.span
-            animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 4 }}
-            transition={{ duration: 0.2 }}
-            style={{
-              position: "absolute",
-              bottom: -18,
-              fontSize: 13,
-              color: "#111",
-              fontFamily: "var(--font-sans)",
-              pointerEvents: "none",
-            }}
-          >
-            ↑
-          </motion.span>
         </div>
       </Link>
     </motion.div>
