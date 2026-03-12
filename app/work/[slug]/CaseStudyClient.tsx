@@ -185,29 +185,29 @@ function SectionWithMediaBlock({
   const hasMedia = !!(imageSrc || videoSrc)
 
   return (
-    <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
-      <div className={`flex flex-col ${hasMedia ? "md:flex-row" : ""} items-start gap-8 md:gap-12`}>
-        {/* Text column — same max-width as SectionBlock */}
-        <div className="min-w-0 md:max-w-[66%] flex-1 grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
+    <div className="relative border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
+      {/* Media: absolute so it doesn't stretch the section height */}
+      {hasMedia && (
+        <div className="hidden md:flex justify-center absolute top-8 right-0 w-[280px]">
           <div>
-            {label && (
-              <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
-            )}
-          </div>
-          <div className="t-body text-base md:text-3xl text-ink">
-            <p>{text}</p>
-          </div>
-        </div>
-
-        {/* Media column — desktop */}
-        {hasMedia && (
-          <div className="hidden md:block w-[280px] shrink-0">
             {media}
             {caption && (
               <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
             )}
           </div>
-        )}
+        </div>
+      )}
+
+      {/* Text: max-w-[66%] — same as SectionBlock, won't run under media */}
+      <div className="md:max-w-[66%] grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
+        <div>
+          {label && (
+            <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
+          )}
+        </div>
+        <div className="t-body text-base md:text-3xl text-ink">
+          <p>{text}</p>
+        </div>
       </div>
 
       {/* Mobile: media below text */}
