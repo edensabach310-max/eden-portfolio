@@ -47,10 +47,7 @@ export default function ProximityText({
         const dy = my - cy
         const t = Math.exp(-(dx * dx) / (2 * sigma * sigma) - (dy * dy) / (2 * sy * sy))
         const w = Math.round(minWeight + (maxWeight - minWeight) * t)
-        const approaching = w > parseFloat(el.style.fontVariationSettings?.match(/[\d.]+/)?.[0] ?? "300")
-        el.style.transition = approaching
-          ? "font-variation-settings 0.02s linear"
-          : "font-variation-settings 0.35s ease-out"
+        el.style.transition = "font-variation-settings 0.05s linear"
         el.style.fontVariationSettings = `'wght' ${w}`
       })
     }
