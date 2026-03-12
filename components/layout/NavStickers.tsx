@@ -40,7 +40,7 @@ function StickerItem({
               alignItems: "center",
               justifyContent: "center",
               fontFamily: "var(--font-sans)",
-              fontWeight: 500,
+              fontWeight: 400,
               fontSize: 19,
               color: "#111",
             }}
