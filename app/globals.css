@@ -60,9 +60,10 @@ body {
   --color-card: #222222;
 }
 
-/* mix-blend-multiply is invisible on dark backgrounds — disable it */
+/* Annotation images: multiply on light, invert on dark */
 .dark .mix-blend-multiply {
   mix-blend-mode: normal;
+  filter: invert(1);
 }
 
 /* Selection color */

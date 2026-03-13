@@ -133,8 +133,8 @@ export default function ProximityText({
     const container = containerRef.current
     if (!container) return
 
-    const peakWeight = Math.round(minWeight + (maxWeight - minWeight) * 0.32)
-    const spread = 3.5 // gaussian width in letter-index units
+    const peakWeight = Math.round(minWeight + (maxWeight - minWeight) * 0.55)
+    const spread = 5 // gaussian width in letter-index units
 
     const update = () => {
       const letterCount = letterRefs.current.length
@@ -152,7 +152,7 @@ export default function ProximityText({
         const dist = i - wavePos
         const t = Math.exp(-(dist * dist) / (spread * spread))
         const w = Math.round(minWeight + (peakWeight - minWeight) * t)
-        el.style.transition = "font-variation-settings 0.2s ease-out"
+        el.style.transition = "font-variation-settings 0.15s ease-out"
         el.style.fontVariationSettings = `'wght' ${w}`
       })
     }
