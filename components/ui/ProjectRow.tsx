@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useState } from "react"
+import { useTheme } from "next-themes"
 import type { Project } from "@/types"
 
 interface ProjectRowProps {
@@ -13,6 +14,8 @@ interface ProjectRowProps {
 export default function ProjectRow({ project, index }: ProjectRowProps) {
   const [hovered, setHovered] = useState(false)
   const accent = project.accentColor || "#0057FF"
+  const { resolvedTheme } = useTheme()
+  const ink = resolvedTheme === "dark" ? "#F0F0EB" : "#111111"
 
   return (
     <Link
@@ -42,7 +45,6 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
           backgroundColor: accent,
         }}
       >
-        {/* Number — slides out upward on hover */}
         <motion.span
           className="absolute font-sans font-medium tabular-nums"
           style={{ fontSize: "clamp(1.5rem, 4vw, 2.7rem)", letterSpacing: "-0.04em", color: "#111111", lineHeight: 1 }}
@@ -52,7 +54,6 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
           {String(index + 1).padStart(2, "0")}
         </motion.span>
 
-        {/* Arrow — slides in from below on hover */}
         <motion.span
           className="absolute font-sans font-medium"
           style={{ fontSize: "clamp(1.2rem, 3.5vw, 2.2rem)", color: "#111111", lineHeight: 1 }}
@@ -67,11 +68,8 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
       <div className="flex-1 relative z-10 min-w-0">
         <motion.div
           className="font-sans font-medium leading-none"
-          style={{
-            fontSize: "clamp(1.5rem, 5vw, 4.2rem)",
-            letterSpacing: "-0.03em",
-          }}
-          animate={{ color: hovered ? accent : "#111111" }}
+          style={{ fontSize: "clamp(1.5rem, 5vw, 4.2rem)", letterSpacing: "-0.03em" }}
+          animate={{ color: hovered ? accent : ink }}
           transition={{ duration: 0.2 }}
         >
           {project.title}
@@ -102,7 +100,7 @@ export default function ProjectRow({ project, index }: ProjectRowProps) {
         animate={{
           x: hovered ? 6 : 0,
           opacity: hovered ? 1 : 0.2,
-          color: hovered ? accent : "#111111",
+          color: hovered ? accent : ink,
         }}
         transition={{ duration: 0.2 }}
       >

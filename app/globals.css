@@ -60,6 +60,11 @@ body {
   --color-card: #222222;
 }
 
+/* mix-blend-multiply is invisible on dark backgrounds — disable it */
+.dark .mix-blend-multiply {
+  mix-blend-mode: normal;
+}
+
 /* Selection color */
 ::selection {
   background-color: #C8F135;
