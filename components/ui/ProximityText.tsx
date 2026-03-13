@@ -125,25 +125,35 @@ export default function ProximityText({
     }
   }, [minWeight, maxWeight, sigma, sy, resetWeights])
 
-  // Mobile: scroll-based weight animation
+  // Mobile: scroll-driven wave animation
+  // A gaussian peak travels letter-by-letter as the element scrolls through the viewport.
+  // Max weight is capped at 30% of range to avoid line-break reflow.
   useEffect(() => {
     if (!window.matchMedia("(pointer: coarse)").matches) return
     const container = containerRef.current
     if (!container) return
 
+    const peakWeight = Math.round(minWeight + (maxWeight - minWeight) * 0.32)
+    const spread = 3.5 // gaussian width in letter-index units
+
     const update = () => {
+      const letterCount = letterRefs.current.length
+      if (!letterCount) return
       const rect = container.getBoundingClientRect()
       const viewH = window.innerHeight
-      const elementCenter = rect.top + rect.height / 2
-      const distance = Math.abs(elementCenter - viewH * 0.5)
-      // Peaks at viewport center, fades to minWeight at 60% of viewH away
-      const t = Math.max(0, 1 - distance / (viewH * 0.6))
-      const weight = Math.round(minWeight + (maxWeight - minWeight) * t)
 
-      letterRefs.current.forEach((el) => {
+      // progress: 0 when element bottom enters viewport, 1 when element top leaves
+      const progress = 1 - (rect.top + rect.height) / (viewH + rect.height)
+      // wavePos: -spread..letterCount+spread  →  wave sweeps left-to-right
+      const wavePos = progress * (letterCount + spread * 2) - spread
+
+      letterRefs.current.forEach((el, i) => {
         if (!el) return
-        el.style.transition = "font-variation-settings 0.25s ease-out"
-        el.style.fontVariationSettings = `'wght' ${weight}`
+        const dist = i - wavePos
+        const t = Math.exp(-(dist * dist) / (spread * spread))
+        const w = Math.round(minWeight + (peakWeight - minWeight) * t)
+        el.style.transition = "font-variation-settings 0.2s ease-out"
+        el.style.fontVariationSettings = `'wght' ${w}`
       })
     }
 
