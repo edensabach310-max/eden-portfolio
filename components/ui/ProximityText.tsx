@@ -24,6 +24,7 @@ export default function ProximityText({
   fontFamily = "var(--font-inter), sans-serif",
 }: ProximityTextProps) {
   const sy = sigmaY ?? sigma
+  const containerRef = useRef<HTMLSpanElement>(null)
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([])
   const cachedRects = useRef<{ cx: number; cy: number; h: number }[]>([])
   const currentWeights = useRef<number[]>([])
@@ -60,7 +61,10 @@ export default function ProximityText({
     }
   }, [updateRects])
 
+  // Desktop: mouse proximity animation
   useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return
+
     const sig2 = 2 * sigma * sigma
     const sy2 = 2 * sy * sy
 
@@ -74,7 +78,6 @@ export default function ProximityText({
         if (!el) return
         const { cx, cy, h } = cachedRects.current[i] ?? { cx: 0, cy: 0, h: 0 }
 
-        // Find closest point on movement path [prev → current] to letter center
         let pathX = mx
         let pathY = my
 
@@ -93,7 +96,6 @@ export default function ProximityText({
           }
         }
 
-        // Center-based distance — natural spotlight falloff per letter
         const dx = pathX - cx
         const dy = pathY - cy
 
@@ -123,8 +125,35 @@ export default function ProximityText({
     }
   }, [minWeight, maxWeight, sigma, sy, resetWeights])
 
+  // Mobile: scroll-based weight animation
+  useEffect(() => {
+    if (!window.matchMedia("(pointer: coarse)").matches) return
+    const container = containerRef.current
+    if (!container) return
+
+    const update = () => {
+      const rect = container.getBoundingClientRect()
+      const viewH = window.innerHeight
+      const elementCenter = rect.top + rect.height / 2
+      const distance = Math.abs(elementCenter - viewH * 0.5)
+      // Peaks at viewport center, fades to minWeight at 60% of viewH away
+      const t = Math.max(0, 1 - distance / (viewH * 0.6))
+      const weight = Math.round(minWeight + (maxWeight - minWeight) * t)
+
+      letterRefs.current.forEach((el) => {
+        if (!el) return
+        el.style.transition = "font-variation-settings 0.25s ease-out"
+        el.style.fontVariationSettings = `'wght' ${weight}`
+      })
+    }
+
+    window.addEventListener("scroll", update, { passive: true })
+    update()
+    return () => window.removeEventListener("scroll", update)
+  }, [minWeight, maxWeight])
+
   return (
-    <span className={className} style={style}>
+    <span ref={containerRef} className={className} style={style}>
       {text.split("").map((letter, i) => (
         <span
           key={i}

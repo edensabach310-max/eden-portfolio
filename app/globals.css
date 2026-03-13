@@ -39,10 +39,25 @@ html {
 }
 
 body {
-  background-color: #FAFAFA;
-  color: #111111;
+  background-color: var(--color-bg, #FAFAFA);
+  color: var(--color-ink, #111111);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+:root {
+  --color-bg: #FAFAFA;
+  --color-ink: #111111;
+  --color-muted: #8C8C8C;
+  --color-card: #E8E8E0;
+}
+
+.dark {
+  --color-bg: #111111;
+  --color-ink: #F0F0EB;
+  --color-muted: #666666;
+  --color-card: #222222;
 }
 
 /* Selection color */

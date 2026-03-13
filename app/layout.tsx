@@ -4,6 +4,7 @@ import "./globals.css"
 import SiteShell from "@/components/layout/SiteShell"
 import CustomCursor from "@/components/interactions/CustomCursor"
 import KonamiCode from "@/components/interactions/KonamiCode"
+import ThemeProvider from "@/components/layout/ThemeProvider"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,11 +26,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body>
-        <CustomCursor />
-        <KonamiCode />
-        <SiteShell>{children}</SiteShell>
+        <ThemeProvider>
+          <CustomCursor />
+          <KonamiCode />
+          <SiteShell>{children}</SiteShell>
+        </ThemeProvider>
       </body>
     </html>
   )

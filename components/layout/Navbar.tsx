@@ -7,6 +7,7 @@ import { useState, useEffect } from "react"
 
 import ProximityText from "@/components/ui/ProximityText"
 import NavStickers from "./NavStickers"
+import YinYangToggle from "@/components/ui/YinYangToggle"
 
 const links = [
   { href: "/#work", label: "Work" },
@@ -28,9 +29,9 @@ export default function Navbar() {
     <motion.header
       className="fixed top-0 left-0 right-0 z-[999] px-6 md:px-12 transition-all duration-500"
       style={{
-        background: scrolled ? "rgba(250,250,250,0.85)" : "transparent",
+        background: scrolled ? "color-mix(in srgb, var(--color-bg) 85%, transparent)" : "transparent",
         backdropFilter: scrolled ? "blur(6px)" : "none",
-        borderBottom: scrolled ? "1px solid #E8E8E0" : "none",
+        borderBottom: scrolled ? "1px solid var(--color-card)" : "none",
       }}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -56,10 +57,11 @@ export default function Navbar() {
         </Link>
 
         {/* Nav links */}
-        <nav className="flex items-center gap-4 md:gap-6 t-body text-sm md:text-3xl">
+        <nav className="flex items-center gap-4 md:gap-6 t-body text-lg md:text-3xl">
           <span className="hidden md:contents">
             <NavStickers />
           </span>
+          <YinYangToggle />
           {links.map((link) => {
             const active =
               (link.href === "/#work" && pathname === "/") ||
