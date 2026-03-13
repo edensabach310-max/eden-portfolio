@@ -185,9 +185,7 @@ function SectionWithMediaBlock({
           </div>
         ) : videoEl
       ) : imageSrc ? (
-        <div className="annotation-wrap">
-          <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto mix-blend-multiply" />
-        </div>
+        <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto mix-blend-multiply" />
       ) : null}
     </div>
   )
@@ -253,7 +251,7 @@ function ImageBlock({
 
   return (
     <div className={wrapperClass}>
-      <div className="annotation-wrap">
+      <div>
         <Image src={src} alt={alt} width={0} height={0} sizes="100vw" className="w-full h-auto mix-blend-multiply" />
       </div>
       {caption && (
@@ -279,10 +277,10 @@ function ImagePairBlock({
   return (
     <div className="my-8 md:my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div className="annotation-wrap">
+        <div>
           <Image src={leftSrc} alt={leftAlt} width={0} height={0} sizes="50vw" className="w-full h-auto mix-blend-multiply" />
         </div>
-        <div className="annotation-wrap">
+        <div>
           <Image src={rightSrc} alt={rightAlt} width={0} height={0} sizes="50vw" className="w-full h-auto mix-blend-multiply" />
         </div>
       </div>

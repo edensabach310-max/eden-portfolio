@@ -60,14 +60,9 @@ body {
   --color-card: #222222;
 }
 
-/* Annotation images: multiply on light bg, white card on dark bg */
+/* mix-blend-multiply is invisible on dark backgrounds — disable it */
 .dark .mix-blend-multiply {
   mix-blend-mode: normal;
-}
-.dark .annotation-wrap {
-  background: white;
-  border-radius: 12px;
-  padding: 12px;
 }
 
 /* Selection color */
