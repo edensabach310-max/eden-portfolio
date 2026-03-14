@@ -192,33 +192,34 @@ function SectionWithMediaBlock({
 
   const hasMedia = !!(imageSrc || videoSrc)
 
+  const textBlock = (
+    <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
+      <div>
+        {label && (
+          <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
+        )}
+      </div>
+      <div className="t-body text-base md:text-3xl text-ink min-w-0">
+        <p>{text}</p>
+      </div>
+    </div>
+  )
+
   return (
     <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
-      <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
-
-        {/* Text */}
-        <div className="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
-          <div>
-            {label && (
-              <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
-            )}
-          </div>
-          <div className="t-body text-base md:text-3xl text-ink">
-            <p>{text}</p>
-          </div>
-        </div>
-
-        {/* Media */}
-        {hasMedia && (
+      {hasMedia ? (
+        <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
+          <div className="flex-1 min-w-0">{textBlock}</div>
           <div className="w-full md:w-[280px] flex-shrink-0">
             {media}
             {caption && (
               <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
             )}
           </div>
-        )}
-
-      </div>
+        </div>
+      ) : (
+        textBlock
+      )}
     </div>
   )
 }
