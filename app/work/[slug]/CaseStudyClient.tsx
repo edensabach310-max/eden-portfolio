@@ -197,7 +197,7 @@ function SectionWithMediaBlock({
       <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
 
         {/* Text */}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
+        <div className="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
           <div>
             {label && (
               <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
