@@ -9,7 +9,7 @@ export default function YinYangToggle() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => { setMounted(true) }, [])
-  if (!mounted) return <div style={{ width: 32, height: 32 }} />
+  if (!mounted) return <div style={{ width: 34, height: 34 }} />
 
   const isDark = theme === "dark"
 
@@ -21,15 +21,29 @@ export default function YinYangToggle() {
       style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", background: "none", border: "none", padding: 0 }}
     >
       <motion.svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="28"
-        height="28"
+        width="34"
+        height="34"
         viewBox="0 0 256 256"
-        fill="currentColor"
         animate={{ rotate: isDark ? 180 : 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM40,128a88.1,88.1,0,0,1,88-88,40,40,0,0,1,0,80A56,56,0,0,0,77.39,200,88,88,0,0,1,40,128Zm88,88a40,40,0,0,1,0-80,56,56,0,0,0,50.61-79.95A88,88,0,0,1,128,216Zm12-40a12,12,0,1,1-12-12A12,12,0,0,1,140,176ZM116,80a12,12,0,1,1,12,12A12,12,0,0,1,116,80Z" />
+        {/* Light half — white fill */}
+        <circle cx="128" cy="128" r="104" fill="white" />
+
+        {/* Dark half — black S-shape */}
+        <path
+          d="M128,24 A104,104 0 1 1 128,232 A52,52 0 0 0 128,128 A52,52 0 0 1 128,24 Z"
+          fill="#111111"
+        />
+
+        {/* White dot in dark half */}
+        <circle cx="128" cy="76" r="18" fill="white" />
+
+        {/* Dark dot in light half */}
+        <circle cx="128" cy="180" r="18" fill="#111111" />
+
+        {/* Outer ring */}
+        <circle cx="128" cy="128" r="104" fill="none" stroke="currentColor" strokeWidth="5" />
       </motion.svg>
     </motion.button>
   )

@@ -61,7 +61,6 @@ export default function Navbar() {
           <span className="hidden md:contents">
             <NavStickers />
           </span>
-          <YinYangToggle />
           {links.map((link) => {
             const active =
               (link.href === "/#work" && pathname === "/") ||
@@ -78,6 +77,7 @@ export default function Navbar() {
               </Link>
             )
           })}
+          <YinYangToggle />
         </nav>
       </div>
     </motion.header>
