@@ -193,40 +193,32 @@ function SectionWithMediaBlock({
   const hasMedia = !!(imageSrc || videoSrc)
 
   return (
-    <div className="relative border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
-      {/* Media: absolute so it doesn't stretch the section height */}
-      {hasMedia && (
-        <div className="hidden md:flex justify-center absolute top-8 right-0 w-[280px]">
+    <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
+      <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
+
+        {/* Text */}
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
           <div>
+            {label && (
+              <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
+            )}
+          </div>
+          <div className="t-body text-base md:text-3xl text-ink">
+            <p>{text}</p>
+          </div>
+        </div>
+
+        {/* Media */}
+        {hasMedia && (
+          <div className="w-full md:w-[280px] flex-shrink-0">
             {media}
             {caption && (
               <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
             )}
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Text: max-w-[66%] — same as SectionBlock, won't run under media */}
-      <div className="md:max-w-[66%] grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
-        <div>
-          {label && (
-            <span className="t-body text-sm md:text-3xl text-muted">{label}</span>
-          )}
-        </div>
-        <div className="t-body text-base md:text-3xl text-ink">
-          <p>{text}</p>
-        </div>
       </div>
-
-      {/* Mobile: media below text */}
-      {hasMedia && (
-        <div className="md:hidden mt-6">
-          {media}
-          {caption && (
-            <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
-          )}
-        </div>
-      )}
     </div>
   )
 }
