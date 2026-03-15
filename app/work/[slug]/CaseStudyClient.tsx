@@ -218,7 +218,7 @@ function SectionWithMediaBlock({
           </div>
         </div>
       ) : (
-        textBlock
+        <div className="md:max-w-[66%]">{textBlock}</div>
       )}
     </div>
   )
