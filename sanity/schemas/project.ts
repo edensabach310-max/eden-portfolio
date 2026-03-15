@@ -50,8 +50,8 @@ export const projectSchema = defineType({
       name: "heroVideo",
       title: "Hero Video (optional — replaces image)",
       type: "file",
-      description: "⚠️ MP4 only. If set, the video plays instead of the hero image.",
-      options: { accept: "video/mp4" },
+      description: "If set, the video plays instead of the hero image. MP4 recommended.",
+      options: { accept: "video/*" },
     }),
     defineField({
       name: "accentColor",
