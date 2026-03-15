@@ -5,6 +5,7 @@ export interface Project {
   category: "product" | "creative"
   tagline: string
   heroImage?: SanityImage
+  heroVideoUrl?: string | null
   accentColor: string
   role: string
   year: string
@@ -35,7 +36,7 @@ export type ContentBlock =
   | { _type: "videoBlock"; _key: string; url?: string; fileUrl?: string; caption?: string; size?: "full" | "medium" | "small"; rounded?: boolean; phoneFrame?: boolean }
   | { _type: "figmaEmbed"; _key: string; embedUrl: string; caption?: string }
   | { _type: "metricBlock"; _key: string; metrics: { label: string; value: string }[] }
-  | { _type: "sectionWithMedia"; _key: string; label?: string; text: string; image?: SanityImage; videoUrl?: string; videoFileUrl?: string; caption?: string; rounded?: boolean; phoneFrame?: boolean }
+  | { _type: "sectionWithMedia"; _key: string; label?: string; text: string; imageUrl?: string | null; imageAlt?: string; videoUrl?: string; videoFileUrl?: string; caption?: string; rounded?: boolean; phoneFrame?: boolean }
 
 export interface AboutData {
   bio: string

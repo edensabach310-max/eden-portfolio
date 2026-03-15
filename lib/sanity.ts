@@ -38,6 +38,7 @@ export async function getProjectBySlug(slug: string) {
     `*[_type == "project" && slug.current == $slug][0] {
       _id, title, slug, category, tagline,
       "heroImage": heroImage { ..., "url": asset->url },
+      "heroVideoUrl": heroVideo.asset->url,
       accentColor, role, year, team,
       overview, problem, process, solution, impact,
       contentBlocks[] {
@@ -53,7 +54,8 @@ export async function getProjectBySlug(slug: string) {
         },
         _type == "sectionWithMedia" => {
           ...,
-          "image": image { ..., "url": asset->url },
+          "imageUrl": image.asset->url,
+          "imageAlt": image.alt,
           "videoFileUrl": videoFile.asset->url
         },
         _type == "videoBlock" => {

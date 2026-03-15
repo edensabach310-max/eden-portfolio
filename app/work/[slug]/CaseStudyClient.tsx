@@ -377,8 +377,9 @@ function MetricBlock({ metrics }: { metrics: { label: string; value: string }[] 
 export default function CaseStudyClient({ project, nextProject }: Props) {
   const accent = project.accentColor || "#0057FF"
 
-  // Resolve hero image URL (supports both Sanity CDN objects and local paths)
-  const heroImageUrl = project.heroImage
+  // Resolve hero media URLs
+  const heroVideoUrl = project.heroVideoUrl || null
+  const heroImageUrl = !heroVideoUrl && project.heroImage
     ? (project.heroImage as unknown as { url: string }).url || null
     : null
 
@@ -431,9 +432,25 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
         </motion.div>
       </div>
 
-      {/* Hero image — full width, right after meta */}
+      {/* Hero media — full width, right after meta */}
       <div className="px-6 md:px-12 mt-8 md:mt-12">
-        {heroImageUrl ? (
+        {heroVideoUrl ? (
+          <motion.div
+            className="relative aspect-video overflow-hidden bg-card/30"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <video
+              src={heroVideoUrl}
+              autoPlay
+              muted
+              playsInline
+              loop
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        ) : heroImageUrl ? (
           <motion.div
             className="relative aspect-video overflow-hidden bg-card/30"
             initial={{ opacity: 0, y: 24 }}
@@ -482,9 +499,9 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
           if (block._type === "textBlock")
             return <SectionBlock key={block._key} text={block.text} />
           if (block._type === "sectionWithMedia") {
-            const imageSrc = (block.image as unknown as { url: string })?.url || ""
+            const imageSrc = block.imageUrl || ""
             const videoSrc = block.videoUrl || block.videoFileUrl || ""
-            return <SectionWithMediaBlock key={block._key} label={block.label} text={block.text} imageSrc={imageSrc} imageAlt={block.image?.alt || ""} videoSrc={videoSrc || undefined} caption={block.caption} rounded={block.rounded} phoneFrame={block.phoneFrame} />
+            return <SectionWithMediaBlock key={block._key} label={block.label} text={block.text} imageSrc={imageSrc} imageAlt={block.imageAlt || ""} videoSrc={videoSrc || undefined} caption={block.caption} rounded={block.rounded} phoneFrame={block.phoneFrame} />
           }
           if (block._type === "imageBlock") {
             const src = (block.image as unknown as { url: string }).url || ""
