@@ -110,17 +110,6 @@ export default function HomeClient({ productProjects, creativeProjects, homepage
           </div>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <div className="absolute left-6 md:left-12 bottom-20 hidden md:flex flex-col items-center gap-2">
-          <motion.div
-            className="w-px h-16 bg-muted/40 origin-top"
-            animate={{ scaleY: [0, 1, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          />
-          <span className="font-mono text-[10px] text-muted/60 tracking-widest uppercase rotate-90 mt-2">
-            scroll
-          </span>
-        </div>
       </section>
 
       {/* ── Work Section ───────────────────────────────────── */}

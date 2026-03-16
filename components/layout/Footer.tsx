@@ -36,7 +36,7 @@ export default function Footer() {
     <footer className="border-t border-card mt-32 px-6 md:px-12 py-8">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-center gap-6">
-          <span className="font-sans text-sm text-muted">© 2024 Eden Sabach</span>
+          <span className="font-sans text-sm text-muted">© 2026 Eden Sabach</span>
           <LiveClock />
         </div>
 
