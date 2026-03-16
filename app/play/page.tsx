@@ -167,14 +167,14 @@ export default function StickersPage() {
             </p>
           </div>
         </div>
-        <div className="w-full overflow-hidden" style={{ borderRadius: 12, aspectRatio: "16/9" }}>
-          <iframe
-            src="https://eden-type-pong.netlify.app"
-            title="Type Pong"
-            className="w-full h-full border-0"
-            allow="autoplay"
-          />
-        </div>
+        <a
+          href="https://eden-type-pong.netlify.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block t-body text-3xl text-ink hover-underline transition-colors"
+        >
+          Play →
+        </a>
       </div>
 
       {/* Divider */}
