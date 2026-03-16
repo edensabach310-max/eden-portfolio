@@ -102,7 +102,7 @@ interface Props {
 
 function SectionBlock({ label, text }: { label?: string; text: string }) {
   return (
-    <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12 md:max-w-[66%]">
+    <div className="border-t border-card pt-6 md:pt-8 mt-6 md:mt-8 md:max-w-[66%]">
       <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-8">
         <div>
           {label && (
@@ -206,13 +206,11 @@ function SectionWithMediaBlock({
   )
 
   return (
-    <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
+    <div className="border-t border-card pt-6 md:pt-8 mt-6 md:mt-8">
       {hasMedia ? (
-        <div className="relative">
-          {/* Text takes full width minus image column on desktop */}
-          <div className="md:pr-[308px] min-w-0">{textBlock}</div>
-          {/* Image: stacked below text on mobile, absolute top-right on desktop (overflows into next section naturally) */}
-          <div className="mt-8 md:mt-0 md:absolute md:top-0 md:right-0 md:w-[280px] md:z-10">
+        <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
+          <div className="flex-1 min-w-0">{textBlock}</div>
+          <div className="w-full md:w-[280px] flex-shrink-0">
             {media}
             {caption && (
               <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
