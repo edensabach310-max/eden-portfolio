@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import AnimatedText from "@/components/ui/AnimatedText"
@@ -137,19 +137,7 @@ function SectionWithMediaBlock({
   phoneFrame?: boolean
 }) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const textColRef = useRef<HTMLDivElement>(null)
-  const [textHeight, setTextHeight] = useState<number | undefined>(undefined)
   const youtubeId = videoSrc ? getYouTubeId(videoSrc) : null
-
-  // Measure text column height and clip image to match — prevents gap below text
-  useEffect(() => {
-    const el = textColRef.current
-    if (!el) return
-    const ro = new ResizeObserver(() => setTextHeight(el.offsetHeight))
-    ro.observe(el)
-    setTextHeight(el.offsetHeight)
-    return () => ro.disconnect()
-  }, [])
 
   useEffect(() => {
     const video = videoRef.current
@@ -197,15 +185,7 @@ function SectionWithMediaBlock({
           </div>
         ) : videoEl
       ) : imageSrc ? (
-        <Image
-          src={imageSrc}
-          alt={imageAlt || ""}
-          width={0}
-          height={0}
-          sizes="280px"
-          className="w-full h-auto object-top object-cover mix-blend-multiply"
-          style={textHeight ? { maxHeight: textHeight } : undefined}
-        />
+        <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto mix-blend-multiply" />
       ) : null}
     </div>
   )
@@ -228,9 +208,11 @@ function SectionWithMediaBlock({
   return (
     <div className="border-t border-card pt-8 md:pt-12 mt-8 md:mt-12">
       {hasMedia ? (
-        <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
-          <div ref={textColRef} className="flex-1 min-w-0">{textBlock}</div>
-          <div className="w-full md:w-[280px] flex-shrink-0">
+        <div className="relative">
+          {/* Text takes full width minus image column on desktop */}
+          <div className="md:pr-[308px] min-w-0">{textBlock}</div>
+          {/* Image: stacked below text on mobile, absolute top-right on desktop (overflows into next section naturally) */}
+          <div className="mt-8 md:mt-0 md:absolute md:top-0 md:right-0 md:w-[280px] md:z-10">
             {media}
             {caption && (
               <p className="t-body text-sm md:text-3xl text-muted mt-3">{caption}</p>
