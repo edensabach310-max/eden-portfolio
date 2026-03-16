@@ -157,6 +157,29 @@ export default function StickersPage() {
   return (
     <div className="min-h-screen pt-28 pb-32 px-6 md:px-12" style={{ userSelect: "none" }}>
 
+      {/* Pong game */}
+      <div className="mb-24">
+        <div className="mb-8 flex items-end justify-between">
+          <div>
+            <p className="t-body text-3xl text-ink">Type Pong</p>
+            <p className="t-body text-3xl text-muted/50 mt-1">
+              W / S vs ↑ / ↓ · first to 7
+            </p>
+          </div>
+        </div>
+        <div className="w-full overflow-hidden" style={{ borderRadius: 12, aspectRatio: "16/9" }}>
+          <iframe
+            src="https://eden-type-pong.netlify.app"
+            title="Type Pong"
+            className="w-full h-full border-0"
+            allow="autoplay"
+          />
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-card mb-16" />
+
       {/* Header */}
       <div className="mb-12 flex items-end justify-between">
         <div>
