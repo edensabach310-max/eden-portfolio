@@ -185,7 +185,7 @@ function SectionWithMediaBlock({
           </div>
         ) : videoEl
       ) : imageSrc ? (
-        <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto mix-blend-multiply" />
+        <Image src={imageSrc} alt={imageAlt || ""} width={0} height={0} sizes="280px" className="w-full h-auto max-h-[420px] object-top object-cover mix-blend-multiply" />
       ) : null}
     </div>
   )
