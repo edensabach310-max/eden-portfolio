@@ -57,7 +57,7 @@ export default function HomeClient({ productProjects, creativeProjects, homepage
           <motion.div
             className="font-sans font-light text-ink"
             style={{
-              fontSize: "clamp(2.75rem, 8.5vw, 7.5rem)",
+              fontSize: "clamp(2rem, 8.5vw, 7.5rem)",
               letterSpacing: "-0.02em",
               lineHeight: 1.05,
             }}
