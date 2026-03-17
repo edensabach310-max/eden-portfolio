@@ -95,7 +95,10 @@ function AutoplayVideo({ src, caption, size = "full", rounded = false, phoneFram
 
 interface Props {
   project: Project
+  prevProject?: Project
   nextProject?: Project
+  isLastInCategory?: boolean
+  otherCategoryProjects?: Project[]
 }
 
 // ─── Block renderers ──────────────────────────────────────────────────────────
@@ -374,7 +377,7 @@ function MetricBlock({ metrics }: { metrics: { label: string; value: string }[] 
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export default function CaseStudyClient({ project, nextProject }: Props) {
+export default function CaseStudyClient({ project, prevProject, nextProject, isLastInCategory, otherCategoryProjects }: Props) {
   const accent = project.accentColor || "#0057FF"
 
   // Resolve hero media URLs
@@ -537,26 +540,59 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
 
       </div>
 
-      {/* Next project */}
-      <div className="px-6 md:px-12 mt-16 md:mt-24 pt-8 md:pt-12 border-t border-card">
-        {nextProject ? (
-          <Link href={`/work/${nextProject.slug.current}`} className="group flex items-center justify-between">
-            <span className="t-body text-sm md:text-3xl text-muted">Next project</span>
+      {/* Project navigation */}
+      <div className="px-6 md:px-12 mt-16 md:mt-24 pt-8 md:pt-12 border-t border-card flex items-center justify-between gap-8">
+
+        {/* Previous */}
+        {prevProject ? (
+          <Link href={`/work/${prevProject.slug.current}`} className="group flex flex-col gap-1">
+            <span className="t-body text-sm md:text-3xl text-muted">Previous</span>
             <motion.span
               className="font-sans font-light text-ink"
-              style={{ fontSize: "clamp(1.5rem, 4vw, 3.5rem)", letterSpacing: "-0.03em" }}
+              style={{ fontSize: "clamp(1.2rem, 3vw, 2.5rem)", letterSpacing: "-0.03em" }}
+              whileHover={{ x: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              ← {prevProject.title}
+            </motion.span>
+          </Link>
+        ) : (
+          <div />
+        )}
+
+        {/* Next / end of category */}
+        {nextProject ? (
+          <Link href={`/work/${nextProject.slug.current}`} className="group flex flex-col gap-1 items-end">
+            <span className="t-body text-sm md:text-3xl text-muted">Next</span>
+            <motion.span
+              className="font-sans font-light text-ink"
+              style={{ fontSize: "clamp(1.2rem, 3vw, 2.5rem)", letterSpacing: "-0.03em" }}
               whileHover={{ x: 8 }}
               transition={{ duration: 0.2 }}
             >
               {nextProject.title} →
             </motion.span>
           </Link>
-        ) : (
-          <Link href="/" className="group flex items-center justify-between">
-            <span className="t-body text-sm md:text-3xl text-muted">More work</span>
+        ) : isLastInCategory && otherCategoryProjects && otherCategoryProjects.length > 0 ? (
+          <Link href={`/work/${otherCategoryProjects[0].slug.current}`} className="group flex flex-col gap-1 items-end">
+            <span className="t-body text-sm md:text-3xl text-muted">
+              {project.category === "product" ? "Also" : "Back to product"}
+            </span>
             <motion.span
               className="font-sans font-light text-ink"
-              style={{ fontSize: "clamp(1.5rem, 4vw, 3.5rem)", letterSpacing: "-0.03em" }}
+              style={{ fontSize: "clamp(1.2rem, 3vw, 2.5rem)", letterSpacing: "-0.03em" }}
+              whileHover={{ x: 8 }}
+              transition={{ duration: 0.2 }}
+            >
+              {otherCategoryProjects[0].title} →
+            </motion.span>
+          </Link>
+        ) : (
+          <Link href="/" className="group flex flex-col gap-1 items-end">
+            <span className="t-body text-sm md:text-3xl text-muted">All work</span>
+            <motion.span
+              className="font-sans font-light text-ink"
+              style={{ fontSize: "clamp(1.2rem, 3vw, 2.5rem)", letterSpacing: "-0.03em" }}
               whileHover={{ x: 8 }}
               transition={{ duration: 0.2 }}
             >
@@ -564,6 +600,7 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
             </motion.span>
           </Link>
         )}
+
       </div>
     </div>
   )

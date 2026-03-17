@@ -31,8 +31,11 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound()
 
   const sameCategory = allProjects.filter((p: { category: string }) => p.category === project.category)
+  const otherCategory = allProjects.filter((p: { category: string }) => p.category !== project.category)
   const idx = sameCategory.findIndex((p: { slug: { current: string } }) => p.slug.current === params.slug)
+  const prevProject = sameCategory[idx - 1] ?? undefined
   const nextProject = sameCategory[idx + 1] ?? undefined
+  const isLastInCategory = idx === sameCategory.length - 1
 
-  return <CaseStudyClient project={project} nextProject={nextProject} />
+  return <CaseStudyClient project={project} prevProject={prevProject} nextProject={nextProject} isLastInCategory={isLastInCategory} otherCategoryProjects={otherCategory} />
 }
