@@ -117,7 +117,26 @@ export const placeholderProjects: Project[] = [
     solution:
       "\"This or That\": iterative style selection using binary psychological choice architecture — no prompts needed, just preferences. Mood Board Builder: assemble visual references instead of describing in words. Plus 2 more novel approaches to be revealed.",
     impact: "2 prototypes selected for full product development. Presented to company leadership.",
-    contentBlocks: [],
+    contentBlocks: [
+      {
+        _type: "sectionBlock" as const,
+        _key: "atf-1",
+        label: "01. Mood Board",
+        text: "Create a moodboard from curated references or your own images, then apply its look and feel to your photos. Instead of describing a style in words, users communicate through images — each mood board becomes a personalized preset tailored to their unique taste and intent. Scalable by design: mood boards enable infinite creation by letting users define styles through references, not fixed outcomes. Users can see exactly what guides the generation and stay in control.",
+      },
+      {
+        _type: "sectionBlock" as const,
+        _key: "atf-2",
+        label: "03. V-Core",
+        text: "A \"this or that\" style exploration experience. Instead of returning one AI result, the app offers multiple looks — letting users compare, explore, and discover what feels most like them. No prompting needed: binary psychological choice architecture replaces text input entirely. Each choice refines the next, and each mood board effectively becomes a personalized preset. The result feels generous: the user always gets more than expected.",
+      },
+      {
+        _type: "sectionBlock" as const,
+        _key: "atf-3",
+        label: "05. Visual Engine",
+        text: "Upload a photo and get three smart editing tools tailored specifically to it — each offering multiple ready-made results. The experience is iterative and reactive: the image responds to input, directions multiply without commitment, and nothing feels pre-made or random. A visual conversation, not a menu of filters. The AI reads the photo and surfaces what's actually relevant to it.",
+      },
+    ],
     featured: true,
     order: 4,
   },

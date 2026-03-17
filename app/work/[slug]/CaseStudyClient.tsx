@@ -385,11 +385,21 @@ export default function CaseStudyClient({ project, nextProject }: Props) {
 
   return (
     <div className="min-h-screen pt-24 md:pt-32 pb-24 md:pb-32">
-      {/* Back */}
-      <div className="px-6 md:px-12 mb-10 md:mb-16">
+      {/* Back + Live link */}
+      <div className="px-6 md:px-12 mb-10 md:mb-16 flex items-center justify-between">
         <Link href="/" className="t-body text-base md:text-3xl text-muted hover:text-ink transition-colors hover-underline">
           ← All work
         </Link>
+        {project.liveUrl && (
+          <Link
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="t-body text-base md:text-3xl text-ink hover-underline transition-colors"
+          >
+            Play →
+          </Link>
+        )}
       </div>
 
       {/* Hero text */}

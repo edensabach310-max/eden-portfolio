@@ -6,6 +6,7 @@ export interface Project {
   tagline: string
   heroImage?: SanityImage
   heroVideoUrl?: string | null
+  liveUrl?: string
   accentColor: string
   role: string
   year: string

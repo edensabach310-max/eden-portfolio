@@ -54,6 +54,12 @@ export const projectSchema = defineType({
       options: { accept: "video/*" },
     }),
     defineField({
+      name: "liveUrl",
+      title: "Live URL (optional)",
+      type: "url",
+      description: "Shows a button on the case study page — e.g. a live demo, playable game, or prototype link",
+    }),
+    defineField({
       name: "accentColor",
       title: "Accent Color",
       type: "string",

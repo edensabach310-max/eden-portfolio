@@ -36,7 +36,7 @@ export async function getFeaturedProjects() {
 export async function getProjectBySlug(slug: string) {
   return sanityClient.fetch(
     `*[_type == "project" && slug.current == $slug][0] {
-      _id, title, slug, category, tagline,
+      _id, title, slug, category, tagline, liveUrl,
       "heroImage": heroImage { ..., "url": asset->url },
       "heroVideoUrl": heroVideo.asset->url,
       accentColor, role, year, team,
