@@ -398,7 +398,7 @@ export default function CaseStudyClient({ project, prevProject, nextProject, isL
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="t-body text-base md:text-3xl text-ink hover-underline transition-colors"
+            className="t-body text-base md:text-3xl text-muted hover:text-ink transition-colors hover-underline"
           >
             Play →
           </Link>
