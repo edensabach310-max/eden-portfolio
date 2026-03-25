@@ -5,6 +5,7 @@ import SiteShell from "@/components/layout/SiteShell"
 import CustomCursor from "@/components/interactions/CustomCursor"
 import KonamiCode from "@/components/interactions/KonamiCode"
 import ThemeProvider from "@/components/layout/ThemeProvider"
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CustomCursor />
           <KonamiCode />
           <SiteShell>{children}</SiteShell>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
