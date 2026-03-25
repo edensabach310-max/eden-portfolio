@@ -388,21 +388,11 @@ export default function CaseStudyClient({ project, prevProject, nextProject, isL
 
   return (
     <div className="min-h-screen pt-24 md:pt-32 pb-24 md:pb-32">
-      {/* Back + Live link */}
-      <div className="px-6 md:px-12 mb-10 md:mb-16 flex items-center justify-between">
+      {/* Back */}
+      <div className="px-6 md:px-12 mb-10 md:mb-16">
         <Link href="/" className="t-body text-base md:text-3xl text-muted hover:text-ink transition-colors hover-underline">
           ← All work
         </Link>
-        {project.liveUrl && (
-          <Link
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="t-body text-base md:text-3xl text-muted hover:text-ink transition-colors hover-underline"
-          >
-            Play →
-          </Link>
-        )}
       </div>
 
       {/* Hero text */}
@@ -425,23 +415,35 @@ export default function CaseStudyClient({ project, prevProject, nextProject, isL
 
         {/* Meta row */}
         <motion.div
-          className="flex flex-wrap gap-8 md:gap-12 pb-8 md:pb-12 border-b border-card"
+          className="flex flex-wrap items-end justify-between gap-8 md:gap-12 pb-8 md:pb-12 border-b border-card"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          {[
-            { label: "Role", value: project.role },
-            { label: "Year", value: project.year },
-            project.team ? { label: "Team", value: project.team } : null,
-          ]
-            .filter(Boolean)
-            .map((meta) => (
-              <div key={meta!.label}>
-                <div className="t-body text-xs md:text-3xl text-muted mb-1 uppercase tracking-widest md:tracking-normal md:normal-case">{meta!.label}</div>
-                <div className="t-body text-base md:text-3xl text-ink">{meta!.value}</div>
-              </div>
-            ))}
+          <div className="flex flex-wrap gap-8 md:gap-12">
+            {[
+              { label: "Role", value: project.role },
+              { label: "Year", value: project.year },
+              project.team ? { label: "Team", value: project.team } : null,
+            ]
+              .filter(Boolean)
+              .map((meta) => (
+                <div key={meta!.label}>
+                  <div className="t-body text-xs md:text-3xl text-muted mb-1 uppercase tracking-widest md:tracking-normal md:normal-case">{meta!.label}</div>
+                  <div className="t-body text-base md:text-3xl text-ink">{meta!.value}</div>
+                </div>
+              ))}
+          </div>
+          {project.liveUrl && (
+            <Link
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="t-body text-base md:text-3xl text-muted hover:text-ink transition-colors hover-underline"
+            >
+              Play →
+            </Link>
+          )}
         </motion.div>
       </div>
 
